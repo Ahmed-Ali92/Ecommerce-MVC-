@@ -22,6 +22,8 @@ namespace ITI.Ecommerce.Models
 
             builder.Property(p => p.NameEN).HasMaxLength(500).IsRequired();
 
+            builder.Property(p => p.Brand).HasMaxLength(500).IsRequired();
+
             builder.Property(p => p.Description).HasMaxLength(5000).IsRequired();
 
             builder.Property(p => p.CategoryID).IsRequired();
