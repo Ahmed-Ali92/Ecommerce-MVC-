@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ITI.Ecommerce.Models
+{
+    public class Category
+    {
+        public int ID { set; get; }
+        public string NameAR { set; get; }
+        public string NameEN { set; get; }
+        public bool IsDeleted { set; get; }
+
+        //Navigation property
+        public ICollection<Product> ProductList { get; set; }
+
+    }
+}
