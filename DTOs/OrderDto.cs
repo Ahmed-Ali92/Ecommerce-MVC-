@@ -15,6 +15,6 @@ namespace DTOs
         public bool IsDeleted { get; set; }
         public int ShoppingCartId { get; set; }
 
-        public ICollection<CustomerDto> customersList { get; set; }
+        
     }
 }
