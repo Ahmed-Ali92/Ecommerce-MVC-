@@ -18,5 +18,8 @@ namespace DTOs
         public float Discount { get; set; }
         public float TotalPrice { get; set; }
         public bool IsDeleted { get; set; }
+
+        public ICollection<ProductImageDto> productImageList { get; set; }
+        public ICollection<ShoppingCartDto> ShoppingCartList { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace DTOs
         public string NameEN { set; get; }
         public bool IsDeleted { get; set; }
 
+        public ICollection<ProductDto> productList { get; set; }
+
 
     }
 }
