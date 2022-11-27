@@ -24,6 +24,14 @@ namespace ITI.Ecommerce.Models
                 .IsRequired().HasMaxLength(200);
             builder.Property(i => i.DateEntered)
                 .IsRequired();
+            builder.Property(p => p.NameEN)
+                .IsRequired().HasMaxLength(500);
+            builder.Property(p => p.NameAR)
+                .IsRequired().HasMaxLength(500);
+            builder.Property(i => i.IsDeleted).IsRequired().HasDefaultValue(false); ;
+
+
+
 
         }
     }

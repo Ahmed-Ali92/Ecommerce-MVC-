@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITI.Ecommerce.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221126095312_DB Creation")]
-    partial class DBCreation
+    [Migration("20221127180427_Three-Migration")]
+    partial class ThreeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,10 +91,25 @@ namespace ITI.Ecommerce.Models.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("MobileNumber")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("NameAR")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("NameEN")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("ID");
 
@@ -246,6 +261,21 @@ namespace ITI.Ecommerce.Models.Migrations
 
                     b.Property<float>("Discount")
                         .HasColumnType("real");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("NameAR")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("NameEN")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");

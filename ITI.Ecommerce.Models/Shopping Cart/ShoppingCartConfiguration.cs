@@ -20,6 +20,10 @@ namespace ITI.Ecommerce.Models
             builder.Property(i => i.Quantity).IsRequired();
             builder.Property(i => i.Discount).IsRequired();
             builder.Property(i => i.Total).IsRequired();
+            builder.Property(p => p.NameAR).IsRequired().HasMaxLength(500);
+            builder.Property(p => p.NameEN).IsRequired().HasMaxLength(500);
+            builder.Property(i => i.IsDeleted).IsRequired().HasDefaultValue(false); ;
+
         }
     }
 }
