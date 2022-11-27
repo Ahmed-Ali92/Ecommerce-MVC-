@@ -19,6 +19,6 @@ namespace DTOs
         public bool IsDeleted { set; get; }
         public DateTime DateEntered { get; set; }
 
-        public ICollection<Order> orderList { get; set; }
+        public ICollection<OrderDto> orderList { get; set; }
     }
 }

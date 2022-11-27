@@ -20,7 +20,7 @@ namespace ITI.Ecommerce.Models
         //Navigation property
 
         public ShoppingCart ShoppingCart { get; set; }
-        public ICollection<Customer> customersList  { get; set; }
+        public Customer customer  { get; set; }
         public Payment Payment { get; set; }
     }
 }
