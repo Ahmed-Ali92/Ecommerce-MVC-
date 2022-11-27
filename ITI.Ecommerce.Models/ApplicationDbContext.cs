@@ -31,7 +31,7 @@ namespace ITI.Ecommerce.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-O2PJAPG;initial catalog = EcommerceDB; integrated security = true;");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-AD4AI73\\MSSQLSERVER01;initial catalog = iti.EcommerceDB; integrated security = true;");
         }
     }
 }
