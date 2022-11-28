@@ -1,0 +1,94 @@
+﻿
+<html>
+    <head>
+    <link rel="stylesheet" href="~/Content/lib/twitter-bootstrap/css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   @*hide top nav bar*@ 
+   <style>
+      
+
+   </style>
+
+
+
+
+   </head>
+    <body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-black">
+            <div class="container-fluid" >
+                <a class="navbar-brand" href="#" style="color:white;"><i class="fa fa-phone" aria-hidden="true"></i>اتصل بنا 19966</a>
+                <button style="color:white;"  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="color:white;"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="#" style="color:white;">المدونه</a>
+                        <a class="nav-link" href="#" style="color:white;">بيع علي بى تك</a>
+                        
+                    </div>
+                  
+                </div>
+                <div class="d-flex justify-content-start">
+                    <a class="nav-link" href="#" style="float:right;color:white;margin-right:20px;">منطقة التوصيل : القاهره</a>
+                    <a class="nav-link" href="#" style="float:right;color:white;">English</a>
+
+                </div>
+
+                
+            </div>
+        </nav>
+
+
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-brand d-flex justify-content-start">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a class="navbar-brand d-flex justify-content-start" href="#"><img src="~/Content/images/StaticImages/B-TechLogo.png" /> </a>
+
+                </div>
+            </div>
+        </nav>
+        </header>
+
+
+        <main>
+        @RenderBody()
+
+        </main>
+
+    <footer>
+
+    </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+   </body>
+
+</html>
+ 
