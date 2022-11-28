@@ -13,10 +13,10 @@ namespace ITI.Ecommerce.Models
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.ToTable("Customer");
-            builder.HasKey(i => i.ID);
-            builder.Property(i => i.ID)
+            builder.HasKey(i => i.Id);
+            builder.Property(i => i.Id)
                 .IsRequired().ValueGeneratedOnAdd();
-            builder.Property(i => i.FullName)
+            builder.Property(i => i.UserName)
                 .IsRequired().HasMaxLength(500);
             builder.Property(i => i.Address)
                 .IsRequired().HasMaxLength(1000);
@@ -24,10 +24,7 @@ namespace ITI.Ecommerce.Models
                 .IsRequired().HasMaxLength(200);
             builder.Property(i => i.DateEntered)
                 .IsRequired();
-            builder.Property(p => p.NameEN)
-                .IsRequired().HasMaxLength(500);
-            builder.Property(p => p.NameAR)
-                .IsRequired().HasMaxLength(500);
+           
             builder.Property(i => i.IsDeleted).IsRequired().HasDefaultValue(false); ;
 
 

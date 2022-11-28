@@ -9,7 +9,7 @@ namespace DTOs
     // add CustomerDto property
     public class CustomerDto
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
         public string MobileNumber { get; set; }

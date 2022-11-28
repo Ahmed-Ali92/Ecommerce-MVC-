@@ -11,10 +11,10 @@ namespace ITI.Ecommerce.Services
 {
     public class PaymentService : IPaymentService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
         public PaymentService(ApplicationDbContext context)
         {
-            _context = context;
+            
         }
         public async Task add(PaymentDto paymentDto)
         {
