@@ -16,6 +16,8 @@
     </PackageReference>
   </ItemGroup>
 
+
+
   <ItemGroup>
     <Folder Include="Content\" />
   </ItemGroup>
@@ -24,5 +26,6 @@
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\ITI.Ecommerce.Models\ITI.Ecommerce.Models.csproj" />
   </ItemGroup>
+
 
 </Project>
