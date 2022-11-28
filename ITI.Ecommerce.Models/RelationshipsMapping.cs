@@ -39,12 +39,16 @@ namespace ITI.Ecommerce.Models
                .Entity<ShoppingCart>()
               .HasOne(i => i.Order).WithOne(i => i.ShoppingCart);
 
-            //Relation Many to many between Customer and Order
+            //Relation one to many between Customer and Order
             builder
                .Entity<Customer>()
-               .HasMany(i => i.orderList)
-               .WithMany(i => i.customersList);
-
+               .HasMany(i => i.orderList).WithOne(i => i.customer)
+               .HasForeignKey(i => i.CustomerId)
+               .IsRequired().OnDelete(DeleteBehavior.Cascade); 
+               
+            builder.Entity<Order>()
+                .HasOne(i=>i.customer).WithMany(i=>i.orderList).HasForeignKey(i=>i.CustomerId)
+                 .IsRequired().OnDelete(DeleteBehavior.Cascade);
             //Relation One to One between Payment and Order
             builder
                .Entity<Payment>()

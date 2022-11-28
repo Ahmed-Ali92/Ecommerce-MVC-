@@ -12,11 +12,11 @@ namespace ITI.Ecommerce.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
         public ShoppingCartService(ApplicationDbContext context)
         {
-            _context = context;
+            
         }
 
         public async Task add(ShoppingCartDto shoppingCartDto)
@@ -32,6 +32,26 @@ namespace ITI.Ecommerce.Services
                 NameEN = shoppingCartDto.NameEN,
                 IsDeleted = shoppingCartDto.IsDeleted
             };
+
+           //add Product in ProductList in Shopping Cart
+            foreach (var productDto in shoppingCartDto.productList)
+            {
+                Product product = new Product()
+                {
+                    NameAR = productDto.NameAR,
+                    NameEN = productDto.NameEN,
+                    Description = productDto.Description,
+                    CategoryID = productDto.CategoryID,
+                    Quantity = productDto.Quantity,
+                    UnitPrice = productDto.UnitPrice,
+                    Discount = productDto.Discount,
+                    TotalPrice = productDto.TotalPrice,
+                    IsDeleted = productDto.IsDeleted,
+                };
+                shoppingCart.productList.Add(product);
+
+            }
+
             await _context.ShoppingCarts.AddAsync(shoppingCart);
             _context.SaveChanges();
 

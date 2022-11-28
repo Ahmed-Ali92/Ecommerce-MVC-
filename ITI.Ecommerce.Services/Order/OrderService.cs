@@ -11,10 +11,10 @@ namespace ITI.Ecommerce.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
         public OrderService(ApplicationDbContext context)
         {
-            _context = context;
+            
         }
         public async Task add(OrderDto orderDto)
         {
@@ -48,10 +48,12 @@ namespace ITI.Ecommerce.Services
             
         }
 
-        public async Task<IEnumerable<OrderDto>> GetAll()
+        public async Task <IEnumerable<OrderDto>> GetAll()
         {
             List<OrderDto> orderList=new List<OrderDto>();
-            var orders =  await  _context.Orders.Where(o=>o.IsDeleted==false).ToListAsync();
+
+           
+           var orders =  await  _context.Orders.Where(o=>o.IsDeleted==false).ToListAsync();
             foreach (var order in orders)
             {
                 OrderDto orderDto = new OrderDto();

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Models
 {
-    public class ApplicationDbContext :DbContext
+    public class ApplicationDbContext : IdentityDbContext<Customer>
     {
+        
+
+        
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
@@ -27,11 +31,13 @@ namespace ITI.Ecommerce.Models
             new OrderConfiguration().Configure(modelBuilder.Entity<Order>());
             new PaymentConfiguration().Configure(modelBuilder.Entity<Payment>());
             modelBuilder.MapRelationships();
+
+            base.OnModelCreating(modelBuilder);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-AD4AI73\\MSSQLSERVER01;initial catalog = iti.EcommerceDB; integrated security = true;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //}
     }
 }

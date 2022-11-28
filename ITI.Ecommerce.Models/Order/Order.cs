@@ -10,7 +10,7 @@ namespace ITI.Ecommerce.Models
     public class Order
     {
         public int ID { get; set; }
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public int PaymentId { get; set; }
         public DateTime OrderDate { get; set; }
         public bool IsDeleted { get; set; }
@@ -20,7 +20,7 @@ namespace ITI.Ecommerce.Models
         //Navigation property
 
         public ShoppingCart ShoppingCart { get; set; }
-        public ICollection<Customer> customersList  { get; set; }
+        public Customer customer  { get; set; }
         public Payment Payment { get; set; }
     }
 }

@@ -1,5 +1,8 @@
 ﻿
 
+using ITI.Ecommerce.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
 public class Program
@@ -8,6 +11,15 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+        builder.Services.AddControllersWithViews();
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseSqlServer("Data Source=.;initial catalog = ITI.EcommerceDB; integrated security = true;");
+        });
+
+        builder.Services.AddIdentity<Customer, IdentityRole>
+           ().AddEntityFrameworkStores<ApplicationDbContext>();
+
         builder.Services.AddControllersWithViews();
         var app = builder.Build();
         app.UseStaticFiles(new StaticFileOptions()
