@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace DTOs
 {
-    public class OrderDto
+    public class ProductImageDto
     {
         public int ID { get; set; }
-        public int CustomerId { get; set; }
-        public int PaymentId { get; set; }
-        public DateTime OrderDate { get; set; }
+        public string Path { get; set; }
+        public int ProductID { get; set; }
         public bool IsDeleted { get; set; }
-        public int ShoppingCartId { get; set; }
-
-        
     }
 }

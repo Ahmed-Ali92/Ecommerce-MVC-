@@ -4,6 +4,7 @@ using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITI.Ecommerce.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221127214823_Add Brand property to product model")]
+    partial class AddBrandpropertytoproductmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,6 +24,21 @@ namespace ITI.Ecommerce.Models.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("CustomerOrder", b =>
+                {
+                    b.Property<int>("customersListID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("orderListID")
+                        .HasColumnType("int");
+
+                    b.HasKey("customersListID", "orderListID");
+
+                    b.HasIndex("orderListID");
+
+                    b.ToTable("CustomerOrder");
+                });
+
             modelBuilder.Entity("ITI.Ecommerce.Models.Category", b =>
                 {
                     b.Property<int>("ID")
@@ -29,9 +46,6 @@ namespace ITI.Ecommerce.Models.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -128,8 +142,6 @@ namespace ITI.Ecommerce.Models.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CustomerId");
 
                     b.HasIndex("PaymentId")
                         .IsUnique();
@@ -302,14 +314,23 @@ namespace ITI.Ecommerce.Models.Migrations
                     b.ToTable("ProductShoppingCart");
                 });
 
-            modelBuilder.Entity("ITI.Ecommerce.Models.Order", b =>
+            modelBuilder.Entity("CustomerOrder", b =>
                 {
-                    b.HasOne("ITI.Ecommerce.Models.Customer", "customer")
-                        .WithMany("orderList")
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("ITI.Ecommerce.Models.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("customersListID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ITI.Ecommerce.Models.Order", null)
+                        .WithMany()
+                        .HasForeignKey("orderListID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ITI.Ecommerce.Models.Order", b =>
+                {
                     b.HasOne("ITI.Ecommerce.Models.Payment", "Payment")
                         .WithOne("Order")
                         .HasForeignKey("ITI.Ecommerce.Models.Order", "PaymentId")
@@ -325,8 +346,6 @@ namespace ITI.Ecommerce.Models.Migrations
                     b.Navigation("Payment");
 
                     b.Navigation("ShoppingCart");
-
-                    b.Navigation("customer");
                 });
 
             modelBuilder.Entity("ITI.Ecommerce.Models.Product", b =>
@@ -369,11 +388,6 @@ namespace ITI.Ecommerce.Models.Migrations
             modelBuilder.Entity("ITI.Ecommerce.Models.Category", b =>
                 {
                     b.Navigation("ProductList");
-                });
-
-            modelBuilder.Entity("ITI.Ecommerce.Models.Customer", b =>
-                {
-                    b.Navigation("orderList");
                 });
 
             modelBuilder.Entity("ITI.Ecommerce.Models.Payment", b =>

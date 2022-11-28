@@ -39,11 +39,11 @@ namespace ITI.Ecommerce.Models
                .Entity<ShoppingCart>()
               .HasOne(i => i.Order).WithOne(i => i.ShoppingCart);
 
-            //Relation Many to many between Customer and Order
+            //Relation one to many between Customer and Order
             builder
                .Entity<Customer>()
-               .HasMany(i => i.orderList)
-               .WithMany(i => i.customersList);
+               .HasMany(i => i.orderList).WithOne(i => i.customer);
+               //.WithMany(i => i.customersList);
 
             //Relation One to One between Payment and Order
             builder
