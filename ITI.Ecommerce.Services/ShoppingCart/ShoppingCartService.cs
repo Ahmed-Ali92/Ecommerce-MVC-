@@ -12,11 +12,11 @@ namespace ITI.Ecommerce.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
         public ShoppingCartService(ApplicationDbContext context)
         {
-            _context = context;
+            
         }
 
         public async Task add(ShoppingCartDto shoppingCartDto)

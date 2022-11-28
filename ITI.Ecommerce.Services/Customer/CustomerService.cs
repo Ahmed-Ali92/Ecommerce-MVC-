@@ -12,21 +12,20 @@ namespace ITI.Ecommerce.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
         public CustomerService(ApplicationDbContext context)
         {
-            _context = context;
+            
         }
 
         public async Task add(CustomerDto customerDto)
         {
             Customer customer = new Customer()
             {
-                NameAR = customerDto.NameAR,
-                NameEN = customerDto.NameEN,
+               
                 IsDeleted = customerDto.IsDeleted,
-                FullName = customerDto.FullName,
+                UserName = customerDto.FullName,
                 Address =   customerDto.Address,
                 MobileNumber = customerDto.MobileNumber ,
                 Email = customerDto.Email,
@@ -40,11 +39,10 @@ namespace ITI.Ecommerce.Services
         {
             Customer customer = new Customer()
             {
-                ID = customerDto.ID,
-                NameAR = customerDto.NameAR,
-                NameEN = customerDto.NameEN,
+                Id = customerDto.ID,
+                
                 IsDeleted = true,
-                FullName = customerDto.FullName,
+                UserName = customerDto.FullName,
                 Address = customerDto.Address,
                 MobileNumber = customerDto.MobileNumber,
                 Email = customerDto.Email,
@@ -62,11 +60,10 @@ namespace ITI.Ecommerce.Services
             {
                 CustomerDto customerDto = new CustomerDto()
                 {
-                    ID = customer.ID,
-                    NameAR = customer.NameAR,
-                    NameEN = customer.NameEN,
+                    ID = customer.Id,
+                   
                     IsDeleted = customer.IsDeleted,
-                    FullName = customer.FullName,
+                    FullName = customer.UserName,
                     Address = customer.Address,
                     MobileNumber = customer.MobileNumber,
                     Email = customer.Email,
@@ -77,9 +74,9 @@ namespace ITI.Ecommerce.Services
             return customerDtosList;
         }
 
-        public async Task<CustomerDto> GetById(int id)
+        public async Task<CustomerDto> GetById(string id)
         {
-            var customer = await _context.Customers.SingleOrDefaultAsync(o => o.ID == id);
+            var customer = await _context.Customers.SingleOrDefaultAsync(o => o.Id == id);
             if (customer == null)
             {
                 throw new Exception("this customer not found");
@@ -88,11 +85,10 @@ namespace ITI.Ecommerce.Services
             {
                 CustomerDto customerDto = new CustomerDto()
                 {
-                    ID = customer.ID,
-                    NameAR = customer.NameAR,
-                    NameEN = customer.NameEN,
+                    ID = customer.Id,
+                   
                     IsDeleted = customer.IsDeleted,
-                    FullName = customer.FullName,
+                    FullName = customer.UserName,
                     Address = customer.Address,
                     MobileNumber = customer.MobileNumber,
                     Email = customer.Email,
@@ -106,11 +102,10 @@ namespace ITI.Ecommerce.Services
         {
             Customer customer = new Customer()
             {
-                ID = customerDto.ID,
-                NameAR = customerDto.NameAR,
-                NameEN = customerDto.NameEN,
+                Id = customerDto.ID,
+               
                 IsDeleted = customerDto.IsDeleted,
-                FullName = customerDto.FullName,
+                UserName = customerDto.FullName,
                 Address = customerDto.Address,
                 MobileNumber = customerDto.MobileNumber,
                 Email = customerDto.Email,

@@ -11,10 +11,10 @@ namespace ITI.Ecommerce.Services
 {
     public class ProductService : IProductService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
         public ProductService(ApplicationDbContext context)
         {
-            _context = context;
+            
         }
 
         public async Task add(ProductDto productDto)

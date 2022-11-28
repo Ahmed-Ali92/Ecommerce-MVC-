@@ -14,9 +14,9 @@ namespace ITI.Ecommerce.Services
     public class CategoryService : ICategoryServie
     {
         private readonly ApplicationDbContext _context;
-        public CategoryService(ApplicationDbContext context)
+        public CategoryService()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
         public async Task add(CategoryDto categoryDto)
         {
