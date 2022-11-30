@@ -1,11 +1,5 @@
 ﻿using DTOs;
-using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
@@ -53,7 +47,7 @@ namespace ITI.Ecommerce.Services
             {
                 ProductImageDto productImageDto = new ProductImageDto()
                 {
-                    ID= img.ID,
+                    ID = img.ID,
                     Path = img.Path,
                     ProductID = img.ProductID,
                     IsDeleted = img.IsDeleted
@@ -61,14 +55,14 @@ namespace ITI.Ecommerce.Services
                 productImageDtoList.Add(productImageDto);
 
             }
-            return  productImageDtoList;
+            return productImageDtoList;
         }
 
         public async Task<ProductImageDto> GetById(int id)
         {
             var productImage = await _context.ProductImages.Where(i => i.ID == id).SingleOrDefaultAsync();
-      
-            if(productImage == null)
+
+            if (productImage == null)
             {
                 throw new Exception("this image not found");
             }

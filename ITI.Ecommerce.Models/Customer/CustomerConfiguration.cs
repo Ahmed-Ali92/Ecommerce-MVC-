@@ -1,10 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ITI.Ecommerce.Models
 {
@@ -24,7 +19,7 @@ namespace ITI.Ecommerce.Models
                 .IsRequired().HasMaxLength(200);
             builder.Property(i => i.DateEntered)
                 .IsRequired();
-           
+
             builder.Property(i => i.IsDeleted).IsRequired().HasDefaultValue(false); ;
 
 
