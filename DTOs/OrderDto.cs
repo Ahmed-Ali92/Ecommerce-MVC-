@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DTOs
+﻿namespace DTOs
 {
     public class OrderDto
     {
@@ -15,6 +9,6 @@ namespace DTOs
         public bool IsDeleted { get; set; }
         public int ShoppingCartId { get; set; }
 
-        
+
     }
 }

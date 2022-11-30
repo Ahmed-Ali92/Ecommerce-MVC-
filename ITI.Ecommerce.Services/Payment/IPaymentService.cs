@@ -1,13 +1,8 @@
 ﻿using DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
-   public interface IPaymentService
+    public interface IPaymentService
     {
         Task add(PaymentDto paymentDto);
         Task<IEnumerable<PaymentDto>> GetAll();

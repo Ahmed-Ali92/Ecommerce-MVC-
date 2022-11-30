@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Models
 {
@@ -44,10 +39,10 @@ namespace ITI.Ecommerce.Models
                .Entity<Customer>()
                .HasMany(i => i.orderList).WithOne(i => i.customer)
                .HasForeignKey(i => i.CustomerId)
-               .IsRequired().OnDelete(DeleteBehavior.Cascade); 
-               
+               .IsRequired().OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Order>()
-                .HasOne(i=>i.customer).WithMany(i=>i.orderList).HasForeignKey(i=>i.CustomerId)
+                .HasOne(i => i.customer).WithMany(i => i.orderList).HasForeignKey(i => i.CustomerId)
                  .IsRequired().OnDelete(DeleteBehavior.Cascade);
             //Relation One to One between Payment and Order
             builder

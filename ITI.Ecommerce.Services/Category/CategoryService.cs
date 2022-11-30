@@ -1,12 +1,5 @@
 ﻿using DTOs;
-using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace ITI.Ecommerce.Services
@@ -24,7 +17,7 @@ namespace ITI.Ecommerce.Services
             {
                 NameAR = categoryDto.NameAR,
                 NameEN = categoryDto.NameEN,
-                IsDeleted=categoryDto.IsDeleted,
+                IsDeleted = categoryDto.IsDeleted,
             };
             await _context.Categories.AddAsync(category);
             _context.SaveChanges();
@@ -46,15 +39,15 @@ namespace ITI.Ecommerce.Services
         public async Task<IEnumerable<CategoryDto>> GetAll()
         {
             List<CategoryDto> categoryDtosList = new List<CategoryDto>();
-            var categories = await _context.Categories.Where(c=>c.IsDeleted==false).ToListAsync();
+            var categories = await _context.Categories.Where(c => c.IsDeleted == false).ToListAsync();
             foreach (var category in categories)
             {
                 CategoryDto categoryDto = new CategoryDto()
                 {
-                    ID=category.ID,
-                    NameAR=category.NameAR,
-                    NameEN =category.NameEN,
-                    IsDeleted=category.IsDeleted,
+                    ID = category.ID,
+                    NameAR = category.NameAR,
+                    NameEN = category.NameEN,
+                    IsDeleted = category.IsDeleted,
                 };
                 categoryDtosList.Add(categoryDto);
             }

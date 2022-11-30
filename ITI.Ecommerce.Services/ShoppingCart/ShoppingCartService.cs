@@ -1,12 +1,6 @@
 ﻿using DTOs;
-using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
@@ -16,7 +10,7 @@ namespace ITI.Ecommerce.Services
 
         public ShoppingCartService(ApplicationDbContext context)
         {
-            
+
         }
 
         public async Task add(ShoppingCartDto shoppingCartDto)
@@ -33,7 +27,7 @@ namespace ITI.Ecommerce.Services
                 IsDeleted = shoppingCartDto.IsDeleted
             };
 
-           //add Product in ProductList in Shopping Cart
+            //add Product in ProductList in Shopping Cart
             foreach (var productDto in shoppingCartDto.productList)
             {
                 Product product = new Product()
@@ -79,7 +73,7 @@ namespace ITI.Ecommerce.Services
             List<ShoppingCartDto> shoppingCartes = new List<ShoppingCartDto>();
             var carts = await _context.ShoppingCarts.Where(o => o.IsDeleted == false).ToListAsync();
 
-            foreach(var cart in carts)
+            foreach (var cart in carts)
             {
                 ShoppingCartDto shoppingCartDto = new ShoppingCartDto();
 
@@ -96,29 +90,29 @@ namespace ITI.Ecommerce.Services
             return shoppingCartes;
         }
 
-        public async  Task<ShoppingCartDto> GetById(int id)
+        public async Task<ShoppingCartDto> GetById(int id)
         {
             var item = await _context.ShoppingCarts.SingleOrDefaultAsync(i => i.ID == id);
 
             if (item == null)
             {
-                throw new Exception ("not found");
+                throw new Exception("not found");
             }
             else
             {
                 ShoppingCartDto shoppingCartDto = new ShoppingCartDto()
                 {
-                   ID= item.ID,
-                   ProductId=   item.ProductId,
-                   UnitPrice= item.UnitPrice,
-                   Quantity= item.Quantity,
-                   Discount= item.Discount,
-                   Total= item.Total,
-                   IsDeleted= item.IsDeleted,
+                    ID = item.ID,
+                    ProductId = item.ProductId,
+                    UnitPrice = item.UnitPrice,
+                    Quantity = item.Quantity,
+                    Discount = item.Discount,
+                    Total = item.Total,
+                    IsDeleted = item.IsDeleted,
 
                 };
                 return shoppingCartDto;
-                
+
 
             }
         }

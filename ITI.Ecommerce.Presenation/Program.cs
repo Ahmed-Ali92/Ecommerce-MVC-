@@ -21,6 +21,20 @@ public class Program
            ().AddEntityFrameworkStores<ApplicationDbContext>();
 
         builder.Services.AddControllersWithViews();
+
+
+        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            options.User.AllowedUserNameCharacters= string.Empty;
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+        });
+
+
+
+
         var app = builder.Build();
         app.UseStaticFiles(new StaticFileOptions()
         {
@@ -29,7 +43,11 @@ public class Program
             (Path.Combine(Directory.GetCurrentDirectory(),
             "Content"))
         });
-        app.MapControllerRoute("main", "{controller=Home}/{action=Index}");
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.MapControllerRoute("main", "{controller=User}/{action=SignIn}");
+
         app.Run();
 
         return 0;

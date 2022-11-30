@@ -1,10 +1,4 @@
 ﻿using DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ITI.Ecommerce.Services
@@ -14,15 +8,15 @@ namespace ITI.Ecommerce.Services
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
         public PaymentService(ApplicationDbContext context)
         {
-            
+
         }
         public async Task add(PaymentDto paymentDto)
         {
             Payment payment = new Payment()
             {
-               
-                PaymentType=paymentDto.PaymentType,
-                IsAllowed=paymentDto.IsAllowed
+
+                PaymentType = paymentDto.PaymentType,
+                IsAllowed = paymentDto.IsAllowed
             };
             await _context.Payments.AddAsync(payment);
             _context.SaveChanges();
@@ -37,7 +31,7 @@ namespace ITI.Ecommerce.Services
         {
             List<PaymentDto> paymentList = new List<PaymentDto>();
             var Payments = await _context.Payments.ToListAsync();
-            
+
             foreach (var payment in Payments)
             {
                 PaymentDto paymentDto = new PaymentDto()

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ITI.Ecommerce.Models
+﻿namespace ITI.Ecommerce.Models
 {
     public class Order
     {
@@ -20,7 +13,7 @@ namespace ITI.Ecommerce.Models
         //Navigation property
 
         public ShoppingCart ShoppingCart { get; set; }
-        public Customer customer  { get; set; }
+        public Customer customer { get; set; }
         public Payment Payment { get; set; }
     }
 }
