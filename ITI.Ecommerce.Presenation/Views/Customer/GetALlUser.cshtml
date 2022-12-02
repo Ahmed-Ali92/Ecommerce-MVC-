@@ -1,0 +1,34 @@
+﻿ @model List<CustomerDto> 
+
+<div class="table-responsive">
+<table class="table table-dark">
+    
+  <thead> 
+      <th>Name_Arabic</th>
+      <th>Name_English</th>
+      <th>Adress</th>
+      <th>Email</th>
+        <th>FullNamed</th>
+        <th>MobleNumber</th>
+        <th>update</th>
+       <th>Delete</th>
+  </thead>
+  <tbody>
+      @foreach(var itm in Model){
+    <tr class="table-active">
+      <td>@itm.NameAR</td>
+      <td>@itm.NameEN</td>
+      <td>@itm.Address</td>
+      <td>@itm.Email</td>
+      <td>@itm.FullName</td>
+      <td>@itm.MobileNumber</td>
+      <td><a class="btn btn-primary" asp-controller="Customer" asp-action="UpdateUser" asp-route-P="@itm.ID">Update</a></td>
+         <td> <a class="btn btn-danger" asp-controller="Customer" asp-action="Delete" asp-route-Prod="@itm.ID">Delete</a><td/>
+          </td>
+
+     </tr>
+     }
+    
+  </tbody>
+</table>
+<div/>

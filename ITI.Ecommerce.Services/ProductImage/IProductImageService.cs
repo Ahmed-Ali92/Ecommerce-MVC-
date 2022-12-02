@@ -1,4 +1,9 @@
 ﻿using DTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
@@ -8,7 +13,7 @@ namespace ITI.Ecommerce.Services
         Task<IEnumerable<ProductImageDto>> GetAll();
         Task<ProductImageDto> GetById(int id);
         Task<IEnumerable<ProductImageDto>> GetByProductId(int id);
-        void Delete(ProductImageDto productImageDto);
+        void Delete(int img);
         void Update(ProductImageDto productImageDto);
 
     }
