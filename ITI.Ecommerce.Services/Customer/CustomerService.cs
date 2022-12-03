@@ -1,13 +1,23 @@
 ﻿using DTOs;
+using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ApplicationDbContext _context ;
 
-        public CustomerService(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+     
+
+       public CustomerService(ApplicationDbContext context)
+
         {
             _context = context;
         }
@@ -16,11 +26,11 @@ namespace ITI.Ecommerce.Services
         {
             Customer customer = new Customer()
             {
-
+               
                 IsDeleted = customerDto.IsDeleted,
-                UserName = customerDto.UserName,
-                Address = customerDto.Address,
-                MobileNumber = customerDto.MobileNumber,
+                UserName = customerDto.FullName,
+                Address =   customerDto.Address,
+                MobileNumber = customerDto.MobileNumber ,
                 Email = customerDto.Email,
                 DateEntered = customerDto.DateEntered
             };
@@ -28,20 +38,23 @@ namespace ITI.Ecommerce.Services
             _context.SaveChanges();
         }
 
-        public void Delete(CustomerDto customerDto)
+        public void Delete(string cust)
         {
-            Customer customer = new Customer()
-            {
-                Id = customerDto.Id,
+            //Customer customer = new Customer()
+            //{
+            //    Id = customerDto.ID,
 
-                IsDeleted = true,
-                UserName = customerDto.UserName,
-                Address = customerDto.Address,
-                MobileNumber = customerDto.MobileNumber,
-                Email = customerDto.Email,
-                DateEntered = customerDto.DateEntered
-            };
-            _context.Update(customer);
+            //    IsDeleted = true,
+            //    UserName = customerDto.FullName,
+            //    Address = customerDto.Address,
+            //    MobileNumber = customerDto.MobileNumber,
+            //    Email = customerDto.Email,
+            //    DateEntered = customerDto.DateEntered
+            //};
+            //_context.Update(customer);
+            //_context.SaveChanges();
+            var Product = _context.Customers.First(p => p.UserName == cust);
+            Product.IsDeleted = true;
             _context.SaveChanges();
         }
 
@@ -53,10 +66,10 @@ namespace ITI.Ecommerce.Services
             {
                 CustomerDto customerDto = new CustomerDto()
                 {
-                    Id = customer.Id,
-
+                    ID = customer.Id,
+                   
                     IsDeleted = customer.IsDeleted,
-                    UserName = customer.UserName,
+                    FullName = customer.UserName,
                     Address = customer.Address,
                     MobileNumber = customer.MobileNumber,
                     Email = customer.Email,
@@ -78,10 +91,10 @@ namespace ITI.Ecommerce.Services
             {
                 CustomerDto customerDto = new CustomerDto()
                 {
-                    Id = customer.Id,
-
+                    ID = customer.Id,
+                   
                     IsDeleted = customer.IsDeleted,
-                    UserName = customer.UserName,
+                    FullName = customer.UserName,
                     Address = customer.Address,
                     MobileNumber = customer.MobileNumber,
                     Email = customer.Email,
@@ -95,10 +108,10 @@ namespace ITI.Ecommerce.Services
         {
             Customer customer = new Customer()
             {
-                Id = customerDto.Id,
-
+                Id = customerDto.ID,
+               
                 IsDeleted = customerDto.IsDeleted,
-                UserName = customerDto.UserName,
+                UserName = customerDto.FullName,
                 Address = customerDto.Address,
                 MobileNumber = customerDto.MobileNumber,
                 Email = customerDto.Email,

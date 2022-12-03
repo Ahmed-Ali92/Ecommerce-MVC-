@@ -1,12 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace ITI.Ecommerce.Presenation
+
 {
     public class ProductModel
     {
         public int ID { get; set; }
         [Display(Name = "Name AraBic")]
-        [Required(ErrorMessage = "حrل الاسم مطلوب")]
+
+        [Required(ErrorMessage = "حقل الاسم مطلوب")]
+
         [MaxLength(500, ErrorMessage = "لا يزيد عن 500")]
         [MinLength(4, ErrorMessage = "Must Be More Than Or Equals 4 Chars.")]
         public string NameAR { get; set; }

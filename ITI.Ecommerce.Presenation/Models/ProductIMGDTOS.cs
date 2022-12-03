@@ -1,4 +1,6 @@
+
 ﻿namespace ITI.Ecommerce.Presenation
+
 {
     public class ProductIMGDTOS
     {

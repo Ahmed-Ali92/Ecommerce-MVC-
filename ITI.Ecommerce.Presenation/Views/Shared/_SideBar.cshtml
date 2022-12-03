@@ -1,9 +1,6 @@
 ﻿
 
     <!-- Sidebar Start -->
-    @inject SignInManager<Customer> UserManager;
-@if (UserManager.IsSignedIn(User) == true)
-            {
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
         <a href="index.html" class="navbar-brand mx-4 mb-3">
@@ -15,8 +12,17 @@
                 <h6 class="mb-0">Admin</h6>
             </div>
             </div>
-        <div class="navbar-nav w-100">
-          @*Product Options*@
+        @*User Option*@
+            <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>User</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a asp-controller="User" asp-action="SignUp" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Add User</a>
+                        <a asp-controller="Role" asp-action="Add" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Add Role</a>
+            
+                    </div>
+                    </div>
+      
+                @*Product Options*@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
                     <div class="dropdown-menu bg-transparent border-0">
@@ -25,24 +31,14 @@
                         <a asp-controller="Product" asp-action="AddProductImages" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Add Image to the Product</a>
                     </div>
                 </div>
-                @*Customer Options*@
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Customer</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                        <a asp-controller="Customer" asp-action="GetAllUser" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>View All Customer</a>
-                    </div>
+            @*Customer Options*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <li><a class="dropdown-item" asp-controller="Customer" asp-action="GetAllUser">GetALlUser</a></li>
                 </div>
-                @*User Options*@
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>User</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                        <a asp-controller="User" asp-action="SignUp" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Add User</a>
-                        <a asp-controller="Role" asp-action="Add" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Add Role</a>
-
-                    </div>
-                </div>
-        </div>
+            </div>
+  
     </nav>
-    </div>
-}
+</div>
 <!-- Sidebar End -->
