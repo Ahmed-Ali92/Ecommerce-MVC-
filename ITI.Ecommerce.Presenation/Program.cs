@@ -1,4 +1,5 @@
 ﻿using ITI.Ecommerce.Models;
+using ITI.Ecommerce.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -22,6 +23,9 @@ namespace ITI.Ecommerce.Presenation
 
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddTransient<ICustomerService, CustomerService>();
+            builder.Services.AddTransient<IProductService, ProductService>();
+            builder.Services.AddTransient<IProductImageService, ProductImageService>();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
@@ -33,7 +37,12 @@ namespace ITI.Ecommerce.Presenation
             });
 
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/SignIn";
 
+                options.AccessDeniedPath = "/User/SignIn";
+            });
 
             var app = builder.Build();
             app.UseStaticFiles(new StaticFileOptions()
@@ -46,7 +55,7 @@ namespace ITI.Ecommerce.Presenation
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.MapControllerRoute("main", "{controller=User}/{action=SignIn}");
+            app.MapControllerRoute("main", "{controller=Home}/{action=index}");
 
             app.Run();
 

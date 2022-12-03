@@ -1,10 +1,10 @@
 ﻿
 @model UserCreateModel
 
-<div class="row w-100">
+<div class="row w-100 pt-5 pt-5 px-xl-5">
     <h1 class="text-info">Sign Up Page</h1>
     <div class="card m-2  sm-col-11 xl-col-8 " style="width: 40rem;">
-<form method="post" asp-controller="User" asp-action="SignUp" class="m-5">
+        <form method="post" asp-controller="User" asp-action="SignUp" class="py-5 px-xl-5">
     <div asp-validation-summary="ModelOnly"></div>
   
    
@@ -44,8 +44,8 @@
           </select>
             
     </div>
-    
-    <input type="submit" value="Sign Up" class="btn btn-primary m-2" />
+
+            <input type="submit" value="Sign Up" class="btn btn-primary mt-3 ms-5" />
 </form>
 </div>
 </div>

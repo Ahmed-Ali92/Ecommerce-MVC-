@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DTOs;
 using ITI.Ecommerce.Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+
 namespace ITI.Ecommerce.Presenation.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CustomerController : Controller
     {
         private readonly ICustomerService _customerService;
@@ -17,26 +21,26 @@ namespace ITI.Ecommerce.Presenation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllUser()
         {
-            List<CustomerDto> li=new List<CustomerDto>();
-            // var User = await _customerService.GetAll();
-            CustomerDto dto = new CustomerDto()
-            {
-                NameAR = "احمد",
-                NameEN = "Ahmed",
-                FullName = "ahmed ali",
-                Address = "sohage",
-                Email = "ahmed@gmail",
-                MobileNumber = "12020920"
-            };
-            li.Add(dto);
-
-            return View(li);
+            //List<CustomerDto> li=new List<CustomerDto>();
+            var User = await _customerService.GetAll();
+            // CustomerDto dto = new CustomerDto()
+            // {
+            //     NameAR = "احمد",
+            //     NameEN = "Ahmed",
+            //     FullName = "ahmed ali",
+            //     Address = "sohage",
+            //     Email = "ahmed@gmail",
+            //     MobileNumber = "12020920"
+            // };
+            // li.Add(dto);
+            //await  _customerService.GetAll();
+            return View(User);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> UpdateUser(string UserName)
+        //[HttpGet]
+        public async Task<IActionResult> UpdateUser(string ID)
         {
-            var User = await _customerService.GetById(UserName);
+            var User = await _customerService.GetById(ID);
 
             return View(User);
         }
@@ -47,7 +51,14 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
             return RedirectToAction("GetAllUser","Customer");
         }
+        //[Route("{ID:Guid}")]
+      
+        public IActionResult Delete(string ID)
+        {
+            _customerService.Delete(ID);
 
+            return RedirectToAction("GetAllUser", "Customer");
+        }
 
 
     }

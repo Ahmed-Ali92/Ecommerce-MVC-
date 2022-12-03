@@ -38,7 +38,7 @@ namespace ITI.Ecommerce.Services
             _context.SaveChanges();
         }
 
-        public void Delete(string cust)
+        public void Delete(string ID)
         {
             //Customer customer = new Customer()
             //{
@@ -53,7 +53,8 @@ namespace ITI.Ecommerce.Services
             //};
             //_context.Update(customer);
             //_context.SaveChanges();
-            var Product = _context.Customers.First(p => p.UserName == cust);
+            var Product = _context.Customers.SingleOrDefault(p => p.Id == ID);
+            
             Product.IsDeleted = true;
             _context.SaveChanges();
         }

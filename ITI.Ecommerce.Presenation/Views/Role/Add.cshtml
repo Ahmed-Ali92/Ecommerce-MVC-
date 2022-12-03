@@ -1,17 +1,17 @@
 ﻿
 @model RoleCreateModel
 
-<div class="row w-100">
+<div class="row w-100 pt-5 px-xl-5">
 <h1 class="text-info ">Add Role</h1>
     <div class="card m-2  sm-col-11 xl-col-8" style="width: 40rem;">
-    <form asp-action="Add" asp-controller="Role" method="post" class="m-5">
+        <form asp-action="Add" asp-controller="Role" method="post" class="py-5 px-xl-5">
     <div asp-validation-summary="ModelOnly"></div>
     <div class="form-group m-2">
         <label asp-for="Name"></label>
             <input asp-for="Name" class=" form-control m-2" />
         <span asp-validation-for="Name"></span>
     </div>
-    <input type="submit" class="btn btn-primary m-2" value="Add" />
+    <input type="submit" class="btn btn-primary mt-3 ms-5" value="Add" />
 </form>
 </div>
 </div>

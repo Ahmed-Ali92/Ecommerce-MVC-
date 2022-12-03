@@ -1,12 +1,15 @@
 ﻿using DTOs;
 using ITI.Ecommerce.Models;
 using ITI.Ecommerce.Presenation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 
 namespace ITI.Ecommerce.Presenation.Controllers
 {
+    
     public class UserController : Controller
     {
         UserManager<Customer> UserManager;
@@ -26,6 +29,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult SignUp()
         {
             ViewBag.Roles = RoleManager.Roles
@@ -35,6 +39,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SignUp(UserCreateModel model)
         {
             DateTime Date = DateTime.Now;
@@ -70,6 +75,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
 
         [HttpGet]
+
         public IActionResult SignIn()
         {
             return View();
@@ -77,6 +83,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
 
         [HttpPost]
+      
         public async Task<IActionResult> SignIn(LoginModel model)
         {
             if (ModelState.IsValid == false)

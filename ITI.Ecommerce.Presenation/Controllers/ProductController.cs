@@ -5,9 +5,12 @@ using ITI.Ecommerce.Models;
 using X.PagedList;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ITI.Ecommerce.Presenation;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ITI.Ecommerce.Presenation.Controllersss
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         public IProductService _pro;
