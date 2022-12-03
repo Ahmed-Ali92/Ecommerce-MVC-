@@ -1,6 +1,12 @@
-﻿namespace DTOs
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DTOs
 {
-    public class CategoryDto
+   public class CategoryDto
     {
         public int ID { set; get; }
         public string NameAR { set; get; }

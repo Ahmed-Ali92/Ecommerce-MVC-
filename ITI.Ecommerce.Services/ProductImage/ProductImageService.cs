@@ -1,5 +1,11 @@
 ﻿using DTOs;
+using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
@@ -24,16 +30,18 @@ namespace ITI.Ecommerce.Services
             _context.SaveChanges();
         }
 
-        public void Delete(ProductImageDto productImageDto)
+        public void Delete(int img)
         {
-            ProductImage productImage = new ProductImage()
-            {
-                ID = productImageDto.ID,
-                Path = productImageDto.Path,
-                ProductID = productImageDto.ProductID,
-                IsDeleted = true
-            };
-            _context.Update(productImage);
+            //ProductImage productImage = new ProductImage()
+            //{
+            //    ID = productImageDto.ID,
+            //    Path = productImageDto.Path,
+            //    ProductID = productImageDto.ProductID,
+            //    IsDeleted = true
+            //};
+            var x = _context.ProductImages.FirstOrDefault(p => p.ID == img);
+            x.IsDeleted = true;
+           // _context.Update(productImage);
             _context.SaveChanges();
         }
 
@@ -41,13 +49,13 @@ namespace ITI.Ecommerce.Services
         {
             List<ProductImageDto> productImageDtoList = new List<ProductImageDto>();
 
-            var productImages = await _context.ProductImages.Where(i => i.IsDeleted == true).ToListAsync();
+            var productImages = await _context.ProductImages.Where(i => i.IsDeleted == false).ToListAsync();
 
             foreach (var img in productImages)
             {
                 ProductImageDto productImageDto = new ProductImageDto()
                 {
-                    ID = img.ID,
+                    ID= img.ID,
                     Path = img.Path,
                     ProductID = img.ProductID,
                     IsDeleted = img.IsDeleted
@@ -55,14 +63,14 @@ namespace ITI.Ecommerce.Services
                 productImageDtoList.Add(productImageDto);
 
             }
-            return productImageDtoList;
+            return  productImageDtoList;
         }
 
         public async Task<ProductImageDto> GetById(int id)
         {
-            var productImage = await _context.ProductImages.Where(i => i.ID == id).SingleOrDefaultAsync();
-
-            if (productImage == null)
+            var productImage = await _context.ProductImages.Where(i => i.ID == id && i.IsDeleted==false).SingleOrDefaultAsync();
+      
+            if(productImage == null)
             {
                 throw new Exception("this image not found");
             }
@@ -81,7 +89,7 @@ namespace ITI.Ecommerce.Services
 
         public async Task<IEnumerable<ProductImageDto>> GetByProductId(int id)
         {
-            var productImages = await _context.ProductImages.Where(i => i.ProductID == id).ToListAsync();
+            var productImages = await _context.ProductImages.Where(i => i.ProductID == id && i.IsDeleted==false).ToListAsync();
             List<ProductImageDto> productImageDtoList = new List<ProductImageDto>();
             foreach (var img in productImages)
             {
