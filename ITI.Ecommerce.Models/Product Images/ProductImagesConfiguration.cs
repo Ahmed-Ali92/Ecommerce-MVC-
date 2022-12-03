@@ -1,14 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Models
 {
-    public class ProductImagesConfiguration :IEntityTypeConfiguration<ProductImage>
+    public class ProductImagesConfiguration : IEntityTypeConfiguration<ProductImage>
     {
         public void Configure(EntityTypeBuilder<ProductImage> builder)
         {

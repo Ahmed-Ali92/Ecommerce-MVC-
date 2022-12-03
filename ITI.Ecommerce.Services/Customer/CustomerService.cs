@@ -1,33 +1,26 @@
 ﻿using DTOs;
-using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context ;
 
         public CustomerService(ApplicationDbContext context)
         {
-            
+            _context = context;
         }
 
         public async Task add(CustomerDto customerDto)
         {
             Customer customer = new Customer()
             {
-               
+
                 IsDeleted = customerDto.IsDeleted,
-                UserName = customerDto.FullName,
-                Address =   customerDto.Address,
-                MobileNumber = customerDto.MobileNumber ,
+                UserName = customerDto.UserName,
+                Address = customerDto.Address,
+                MobileNumber = customerDto.MobileNumber,
                 Email = customerDto.Email,
                 DateEntered = customerDto.DateEntered
             };
@@ -39,10 +32,10 @@ namespace ITI.Ecommerce.Services
         {
             Customer customer = new Customer()
             {
-                Id = customerDto.ID,
-                
+                Id = customerDto.Id,
+
                 IsDeleted = true,
-                UserName = customerDto.FullName,
+                UserName = customerDto.UserName,
                 Address = customerDto.Address,
                 MobileNumber = customerDto.MobileNumber,
                 Email = customerDto.Email,
@@ -60,10 +53,10 @@ namespace ITI.Ecommerce.Services
             {
                 CustomerDto customerDto = new CustomerDto()
                 {
-                    ID = customer.Id,
-                   
+                    Id = customer.Id,
+
                     IsDeleted = customer.IsDeleted,
-                    FullName = customer.UserName,
+                    UserName = customer.UserName,
                     Address = customer.Address,
                     MobileNumber = customer.MobileNumber,
                     Email = customer.Email,
@@ -85,10 +78,10 @@ namespace ITI.Ecommerce.Services
             {
                 CustomerDto customerDto = new CustomerDto()
                 {
-                    ID = customer.Id,
-                   
+                    Id = customer.Id,
+
                     IsDeleted = customer.IsDeleted,
-                    FullName = customer.UserName,
+                    UserName = customer.UserName,
                     Address = customer.Address,
                     MobileNumber = customer.MobileNumber,
                     Email = customer.Email,
@@ -102,10 +95,10 @@ namespace ITI.Ecommerce.Services
         {
             Customer customer = new Customer()
             {
-                Id = customerDto.ID,
-               
+                Id = customerDto.Id,
+
                 IsDeleted = customerDto.IsDeleted,
-                UserName = customerDto.FullName,
+                UserName = customerDto.UserName,
                 Address = customerDto.Address,
                 MobileNumber = customerDto.MobileNumber,
                 Email = customerDto.Email,

@@ -1,27 +1,21 @@
 ﻿using DTOs;
-using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
     public class ProductService : IProductService
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context;
         public ProductService(ApplicationDbContext context)
         {
-            
+            _context = context;
         }
 
         public async Task add(ProductDto productDto)
         {
             Product product = new Product()
             {
-               
+
                 NameAR = productDto.NameAR,
                 NameEN = productDto.NameEN,
                 Description = productDto.Description,
@@ -76,8 +70,8 @@ namespace ITI.Ecommerce.Services
                     UnitPrice = product.UnitPrice,
                     Quantity = product.Quantity,
                     Discount = product.Discount,
-                    TotalPrice= product.TotalPrice,
-                    IsDeleted= product.IsDeleted,
+                    TotalPrice = product.TotalPrice,
+                    IsDeleted = product.IsDeleted,
 
 
                 };
@@ -88,8 +82,9 @@ namespace ITI.Ecommerce.Services
             return productDtoList;
         }
 
-        public async Task<ProductDto> GetByCategoryId(int id)
+        public async Task<IEnumerable<ProductDto>> GetByCategoryId(int id)
         {
+            List<ProductDto> productDtoList = new List<ProductDto>();
             var product = await _context.Products.SingleOrDefaultAsync(p => p.CategoryID == id);
             if (product == null)
             {
@@ -112,13 +107,13 @@ namespace ITI.Ecommerce.Services
                     TotalPrice = product.TotalPrice,
                     IsDeleted = product.IsDeleted,
                 };
-                return productDto;
+                return productDtoList;
             }
         }
 
         public async Task<ProductDto> GetById(int id)
         {
-            var product = await _context.Products.SingleOrDefaultAsync(p=> p.ID == id);
+            var product = await _context.Products.SingleOrDefaultAsync(p => p.ID == id);
             if (product == null)
             {
                 throw new Exception("this product is not found ");
