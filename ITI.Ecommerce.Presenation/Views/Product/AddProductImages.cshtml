@@ -1,4 +1,6 @@
 ﻿@using ITI.Ecommerce.Presenation
+
+@inject IViewLocalizer localizer
 @model ProductIMGDTOS
 <div class="container-fluid">
  <div class="row p-4"> 
@@ -18,7 +20,7 @@
         <input asp-for="Path" class="form-control" />
         <span asp-validation-for="Path"></span>
     </div>
-    <input type="submit" value="Add" class="btn btn-primary m-2"/>
+                <input type="submit" value="@localizer["Save"]" class="btn btn-primary m-2" />
  </form>
  </div>
  <div class="col-3"></div>

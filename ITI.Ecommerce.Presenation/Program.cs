@@ -1,8 +1,14 @@
 ﻿using ITI.Ecommerce.Models;
 using ITI.Ecommerce.Services;
+using JsonBasedLocalization.Web;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
+using System.Globalization;
 
 namespace ITI.Ecommerce.Presenation
 {
@@ -21,7 +27,27 @@ namespace ITI.Ecommerce.Presenation
             builder.Services.AddIdentity<Customer, IdentityRole>
                ().AddEntityFrameworkStores<ApplicationDbContext>();
 
+           
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddLocalization();
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
+
+            builder.Services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(JsonStringLocalizerFactory));
+                });
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]{ new CultureInfo("en-US"), new CultureInfo("ar-EG")};
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
 
             builder.Services.AddTransient<ICustomerService, CustomerService>();
             builder.Services.AddTransient<IProductService, ProductService>();
@@ -55,6 +81,14 @@ namespace ITI.Ecommerce.Presenation
 
             app.UseAuthentication();
             app.UseAuthorization();
+            var supportedCultures = new[] { "en-US", "ar-EG" };
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
+
             app.MapControllerRoute("main", "{controller=Home}/{action=index}");
 
             app.Run();

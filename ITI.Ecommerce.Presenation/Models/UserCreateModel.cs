@@ -11,7 +11,7 @@ namespace ITI.Ecommerce.Presenation
         public string Email { get; set; }
         [Required, MaxLength(1000), MinLength(20), Display(Name = "Address")]
         public string Address { get; set; }
-        [Required,  DataType(DataType.PhoneNumber), Display(Name = "MobileNumber")
+        [Required,  DataType(DataType.PhoneNumber), Display(Name = "Mobile Number")
             //,RegularExpression("^01[0125][0 - 9]{8}$")
             ]
         public string MobileNumber { get; set; }

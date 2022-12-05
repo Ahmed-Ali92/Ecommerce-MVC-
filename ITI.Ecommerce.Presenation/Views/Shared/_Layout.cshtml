@@ -1,11 +1,27 @@
-﻿
-<html>
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@{
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+}
+
+
+
+@*<html >*@
+   @* <html lang="en" dir="@(isRTL ? "RTL" : "LTR")">*@
     <head>
 
     <meta charset="utf-8">
     <title>B-TECH Admain Dash Board</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-   
+
+
+   @* Bootstrap  right to left  cdn*@
+
+    @*@if (isRTL)
+    {
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    }*@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,17 +47,17 @@
        <div class="container-xxl position-relative bg-white d-flex p-0">
 
         <!-- Sidebar -->
-        <partial name="_SideBar"></partial>
+        <partial   name="_SideBar"></partial>
 
         <!-- Content Start -->
 
         <div class="content">
 
             <!--Header Navbar -->
-            <partial name="_Header"></partial>
-            
+            <partial  name="_Header"></partial>
 
-          @RenderBody()
+                <div dir="@(isRTL ? "RTL" : "LTR")">@RenderBody()</div>
+          
 
         </div>
 

@@ -1,6 +1,5 @@
-﻿
- 
-@model ProductModel
+﻿@model ProductModel
+@inject IViewLocalizer localizer
 <div class="container-fluid">
  <div class="row p-4"> 
 
@@ -89,7 +88,7 @@
         <input asp-for="Images" class="form-control" />
         <span asp-validation-for="Images"></span>
     </div*@
-    <input type="submit" value="Add" class="btn btn-primary mt-2 flo"/>
+    <input type="submit" value="@localizer["Save"]" class="btn btn-primary mt-2 flo"/>
     
 </form>
 </div>
