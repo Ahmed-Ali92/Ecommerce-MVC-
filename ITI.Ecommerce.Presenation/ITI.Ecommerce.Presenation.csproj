@@ -19,4 +19,8 @@
     <Folder Include="Content\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ITI.Ecommerce.Services\ITI.Ecommerce.Services.csproj" />
+  </ItemGroup>
+
 </Project>

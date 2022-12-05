@@ -13,10 +13,10 @@ namespace ITI.Ecommerce.Services
     public class CustomerService : ICustomerService
     {
         private readonly ApplicationDbContext _context;
-
-        public CustomerService(ApplicationDbContext context)
+        //Edit Constructor
+        public CustomerService()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
 
         public async Task add(CustomerDto customerDto)
