@@ -13,7 +13,7 @@ namespace ITI.Ecommerce.Services
         Task<IEnumerable<ProductImageDto>> GetAll();
         Task<ProductImageDto> GetById(int id);
         Task<IEnumerable<ProductImageDto>> GetByProductId(int id);
-        void Delete(ProductImageDto productImageDto);
+        void Delete(int img);
         void Update(ProductImageDto productImageDto);
 
     }

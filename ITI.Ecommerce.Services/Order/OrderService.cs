@@ -1,26 +1,22 @@
 ﻿using DTOs;
-using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.Ecommerce.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly ApplicationDbContext _context;
-        public OrderService()
+
+        private readonly ApplicationDbContext _context ;
+        public OrderService(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+           _context = context;
+
         }
         public async Task add(OrderDto orderDto)
         {
             Order order = new Order()
             {
-               
+
                 CustomerId = orderDto.CustomerId,
                 PaymentId = orderDto.PaymentId,
                 OrderDate = orderDto.OrderDate,
@@ -28,7 +24,7 @@ namespace ITI.Ecommerce.Services
                 ShoppingCartId = orderDto.ShoppingCartId
             };
 
-           await _context.Orders.AddAsync(order);
+            await _context.Orders.AddAsync(order);
             _context.SaveChanges();
         }
 
@@ -57,21 +53,21 @@ namespace ITI.Ecommerce.Services
 
         }
 
-        public async Task <IEnumerable<OrderDto>> GetAll()
+        public async Task<IEnumerable<OrderDto>> GetAll()
         {
-            List<OrderDto> orderList=new List<OrderDto>();
+            List<OrderDto> orderList = new List<OrderDto>();
 
-           
-           var orders =  await  _context.Orders.Where(o=>o.IsDeleted==false).ToListAsync();
+
+            var orders = await _context.Orders.Where(o => o.IsDeleted == false).ToListAsync();
             foreach (var order in orders)
             {
                 OrderDto orderDto = new OrderDto();
-                orderDto.ID = order.ID  ;
-                orderDto.CustomerId = order.CustomerId ;
-                orderDto.PaymentId = order.PaymentId  ;
-                orderDto.OrderDate = order.OrderDate ;
-                orderDto.IsDeleted = order.IsDeleted  ;
-                orderDto.ShoppingCartId = order.ShoppingCartId; 
+                orderDto.ID = order.ID;
+                orderDto.CustomerId = order.CustomerId;
+                orderDto.PaymentId = order.PaymentId;
+                orderDto.OrderDate = order.OrderDate;
+                orderDto.IsDeleted = order.IsDeleted;
+                orderDto.ShoppingCartId = order.ShoppingCartId;
                 orderList.Add(orderDto);
             }
             return orderList;

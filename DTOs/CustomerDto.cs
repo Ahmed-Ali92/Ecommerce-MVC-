@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace DTOs
     // add CustomerDto property
     public class CustomerDto
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
+        [Required]
         public string FullName { get; set; }
         public string Address { get; set; }
         public string MobileNumber { get; set; }

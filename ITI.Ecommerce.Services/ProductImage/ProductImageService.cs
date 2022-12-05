@@ -30,16 +30,18 @@ namespace ITI.Ecommerce.Services
             _context.SaveChanges();
         }
 
-        public void Delete(ProductImageDto productImageDto)
+        public void Delete(int img)
         {
-            ProductImage productImage = new ProductImage()
-            {
-                ID = productImageDto.ID,
-                Path = productImageDto.Path,
-                ProductID = productImageDto.ProductID,
-                IsDeleted = true
-            };
-            _context.Update(productImage);
+            //ProductImage productImage = new ProductImage()
+            //{
+            //    ID = productImageDto.ID,
+            //    Path = productImageDto.Path,
+            //    ProductID = productImageDto.ProductID,
+            //    IsDeleted = true
+            //};
+            var x = _context.ProductImages.FirstOrDefault(p => p.ID == img);
+            x.IsDeleted = true;
+           // _context.Update(productImage);
             _context.SaveChanges();
         }
 
@@ -47,7 +49,7 @@ namespace ITI.Ecommerce.Services
         {
             List<ProductImageDto> productImageDtoList = new List<ProductImageDto>();
 
-            var productImages = await _context.ProductImages.Where(i => i.IsDeleted == true).ToListAsync();
+            var productImages = await _context.ProductImages.Where(i => i.IsDeleted == false).ToListAsync();
 
             foreach (var img in productImages)
             {
@@ -66,7 +68,7 @@ namespace ITI.Ecommerce.Services
 
         public async Task<ProductImageDto> GetById(int id)
         {
-            var productImage = await _context.ProductImages.Where(i => i.ID == id).SingleOrDefaultAsync();
+            var productImage = await _context.ProductImages.Where(i => i.ID == id && i.IsDeleted==false).SingleOrDefaultAsync();
       
             if(productImage == null)
             {
@@ -87,7 +89,7 @@ namespace ITI.Ecommerce.Services
 
         public async Task<IEnumerable<ProductImageDto>> GetByProductId(int id)
         {
-            var productImages = await _context.ProductImages.Where(i => i.ProductID == id).ToListAsync();
+            var productImages = await _context.ProductImages.Where(i => i.ProductID == id && i.IsDeleted==false).ToListAsync();
             List<ProductImageDto> productImageDtoList = new List<ProductImageDto>();
             foreach (var img in productImages)
             {
