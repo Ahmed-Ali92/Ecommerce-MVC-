@@ -25,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\ITI.Ecommerce.Models\ITI.Ecommerce.Models.csproj" />
     <ProjectReference Include="..\ITI.Ecommerce.Services\ITI.Ecommerce.Services.csproj" />
   </ItemGroup>
-
 
 </Project>

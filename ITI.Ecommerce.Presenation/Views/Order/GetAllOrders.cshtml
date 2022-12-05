@@ -1,0 +1,32 @@
+﻿@using DTOs
+@model List<OrderDto>
+
+<h1>Test GetAllOrders</h1>
+<a class="btn btn-primary" asp-controller="Order" asp-action="Add">Add New Order</a>
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Customer ID</th>
+            <th scope="col">Payment ID</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Shopping Cart ID</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.CustomerId</td>
+                <td>@order.PaymentId</td>
+                <td>@order.OrderDate</td>
+                <td>@order.ShoppingCartId</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Order" asp-action="Update" asp-route-id="@order.ID">Update</a>
+                </td>
+                <td><a class="btn btn-danger" asp-controller="Order" asp-action="Delete" asp-route-id="@order.ID">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

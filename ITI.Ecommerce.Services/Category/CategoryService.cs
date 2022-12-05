@@ -7,9 +7,9 @@ namespace ITI.Ecommerce.Services
     public class CategoryService : ICategoryServie
     {
         private readonly ApplicationDbContext _context;
-        public CategoryService(ApplicationDbContext context)
+        public CategoryService()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
         public async Task add(CategoryDto categoryDto)
         {
@@ -35,6 +35,34 @@ namespace ITI.Ecommerce.Services
             _context.Update(category);
             _context.SaveChanges();
         }
+        public void CDelete(int id)
+        {
+            var categoryDto = _context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
+            //Category category = new Category()
+            //{
+            //    ID = categoryDto.ID,
+            //    NameAR = categoryDto.NameAR,
+            //    NameEN = categoryDto.NameEN,
+            //    IsDeleted = true,
+            //};
+            categoryDto.IsDeleted = true;
+            _context.Update(categoryDto);
+            _context.SaveChanges();
+        }
+        //public async Task<CategoryDto> CDelete(int id)
+        //{
+        //    var categoryDto = await _context.Categories.SingleOrDefaultAsync(c => c.ID == id);
+        //    Category category = new Category()
+        //    {
+        //        ID = categoryDto.ID,
+        //        NameAR = categoryDto.NameAR,
+        //        NameEN = categoryDto.NameEN,
+        //        IsDeleted = true,
+        //    };
+        //    return categoryDto;
+        //    _context.Update(category);
+        //    _context.SaveChanges();
+        //}
 
         public async Task<IEnumerable<CategoryDto>> GetAll()
         {
@@ -76,16 +104,47 @@ namespace ITI.Ecommerce.Services
 
         public void Update(CategoryDto categoryDto)
         {
-            Category category = new Category()
-            {
-                ID = categoryDto.ID,
-                NameAR = categoryDto.NameAR,
-                NameEN = categoryDto.NameEN,
-                IsDeleted = categoryDto.IsDeleted,
-            };
+            var categoryD = _context.Categories.FirstOrDefault(c => c.ID == categoryDto.ID);
+            //_context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
+            categoryD.NameAR = categoryDto.NameAR;
+            categoryD.NameEN = categoryDto.NameEN;
+            //categoryD.ID = id;
+            //Category category = new Category()
+            //{
+            //    ID = categoryDto.ID,
+            //    NameAR = categoryDto.NameAR,
+            //    NameEN = categoryDto.NameEN,
+            //    IsDeleted = false,
+            //};
 
-            _context.Update(category);
+            //_context.Update(category);
             _context.SaveChanges();
         }
+
+        //public async Task Update(CategoryDto categoryDto)
+        //{
+        //    //var categoryD = _context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
+        //    //_context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
+        //    //categoryD.NameAR = categoryDto.NameAR;
+        //    //categoryD.NameEN = categoryDto.NameEN;
+        //    //categoryD.ID =id;
+        //    Category category = new Category()
+        //    {
+        //        ID = categoryDto.ID,
+        //        NameAR = categoryDto.NameAR,
+        //        NameEN = categoryDto.NameEN,
+        //        IsDeleted = false,
+        //    };
+
+        //    _context.Categories.Update(category);
+        //    _context.SaveChanges();
+        //}
+
+        //----------------------------------------------------------
+        //public Category CUpdate(int id)
+        //{
+        //    var category = _context.Categories.FirstOrDefault(c => c.ID == id);
+        //    return category;
+        //}
     }
 }

@@ -5,8 +5,10 @@ namespace ITI.Ecommerce.Services
 {
     public class PaymentService : IPaymentService
     {
+
         private readonly ApplicationDbContext _context ;
         public PaymentService(ApplicationDbContext context)
+
         {
             _context = context;
         }

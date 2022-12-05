@@ -1,3 +1,4 @@
+
 ﻿using ITI.Ecommerce.Models;
 using ITI.Ecommerce.Services;
 using JsonBasedLocalization.Web;
@@ -15,6 +16,7 @@ namespace ITI.Ecommerce.Presenation
     public class Program
     {
         public static int Main()
+
         {
             var builder = WebApplication.CreateBuilder();
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -52,7 +54,12 @@ namespace ITI.Ecommerce.Presenation
             builder.Services.AddTransient<ICustomerService, CustomerService>();
             builder.Services.AddTransient<IProductService, ProductService>();
             builder.Services.AddTransient<IProductImageService, ProductImageService>();
-
+  
+            builder.Services.AddTransient<IOrderService, OrderService>();
+            builder.Services.AddTransient<ICategoryServie, CategoryService>();
+           
+            builder.Services.AddTransient<IPaymentService, PaymentService>();
+            builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
             builder.Services.Configure<IdentityOptions>(options =>
             {
                 options.User.AllowedUserNameCharacters = string.Empty;

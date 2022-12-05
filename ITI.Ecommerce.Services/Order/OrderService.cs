@@ -5,10 +5,12 @@ namespace ITI.Ecommerce.Services
 {
     public class OrderService : IOrderService
     {
+
         private readonly ApplicationDbContext _context ;
         public OrderService(ApplicationDbContext context)
         {
            _context = context;
+
         }
         public async Task add(OrderDto orderDto)
         {
@@ -26,18 +28,27 @@ namespace ITI.Ecommerce.Services
             _context.SaveChanges();
         }
 
-        public void Delete(OrderDto orderDto)
+        //public void Delete(OrderDto orderDto)
+        //{
+        //    Order order = new Order()
+        //    {
+        //        ID = orderDto.ID,
+        //        CustomerId = orderDto.CustomerId,
+        //        PaymentId = orderDto.PaymentId,
+        //        OrderDate = orderDto.OrderDate,
+        //        IsDeleted = true,
+        //        ShoppingCartId = orderDto.ShoppingCartId
+        //    };
+        //    _context.Update(order);
+        //    _context.SaveChanges();
+
+        //}
+
+        public void Delete(int id)
         {
-            Order order = new Order()
-            {
-                ID = orderDto.ID,
-                CustomerId = orderDto.CustomerId,
-                PaymentId = orderDto.PaymentId,
-                OrderDate = orderDto.OrderDate,
-                IsDeleted = true,
-                ShoppingCartId = orderDto.ShoppingCartId
-            };
-            _context.Update(order);
+            var OrderDto = _context.Orders.FirstOrDefault(o => o.ID == id);
+            OrderDto.IsDeleted = true;
+            _context.Update(OrderDto);
             _context.SaveChanges();
 
         }
@@ -84,18 +95,27 @@ namespace ITI.Ecommerce.Services
             }
         }
 
+        //public void Update(OrderDto orderDto)
+        //{
+        //    Order order = new Order()
+        //    {
+        //        ID = orderDto.ID,
+        //        CustomerId = orderDto.CustomerId,
+        //        PaymentId = orderDto.PaymentId,
+        //        OrderDate = orderDto.OrderDate,
+        //        IsDeleted = orderDto.IsDeleted,
+        //        ShoppingCartId = orderDto.ShoppingCartId
+        //    };
+        //    _context.Update(order);
+        //    _context.SaveChanges();
+        //}
         public void Update(OrderDto orderDto)
         {
-            Order order = new Order()
-            {
-                ID = orderDto.ID,
-                CustomerId = orderDto.CustomerId,
-                PaymentId = orderDto.PaymentId,
-                OrderDate = orderDto.OrderDate,
-                IsDeleted = orderDto.IsDeleted,
-                ShoppingCartId = orderDto.ShoppingCartId
-            };
-            _context.Update(order);
+            var order = _context.Orders.FirstOrDefault(o => o.ID == orderDto.ID);
+            order.CustomerId = orderDto.CustomerId;
+            order.PaymentId = orderDto.PaymentId;
+            order.OrderDate = orderDto.OrderDate;
+            order.ShoppingCartId = orderDto.ShoppingCartId;
             _context.SaveChanges();
         }
     }
