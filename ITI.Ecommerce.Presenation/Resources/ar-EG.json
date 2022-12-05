@@ -44,8 +44,13 @@
   "Role Name": "اسم الدور",
   "Login Page": "صفحة تسجيل الدخول",
   "Sign Up Page": "انشاء حساب جديد",
-
-
-
-
+  "Add New Category": "اضافه فئه جديده",
+  "View All Category": "عرض جميع الفئات",
+  "Categories": "الفئات",
+  "Orders": "الطلبات",
+  "View All Orders": "عرض كل الطلبات",
+  "All Orders": "كل الطلبات",
+  "Products": "المنتجات",
+  "Users": "المستخدمين",
+  "Customers": "العملاء"
 }

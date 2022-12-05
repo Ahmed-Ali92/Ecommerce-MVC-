@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using ITI.Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -7,9 +8,9 @@ namespace ITI.Ecommerce.Services
     public class CategoryService : ICategoryServie
     {
         private readonly ApplicationDbContext _context;
-        public CategoryService()
+        public CategoryService(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context=context;
         }
         public async Task add(CategoryDto categoryDto)
         {

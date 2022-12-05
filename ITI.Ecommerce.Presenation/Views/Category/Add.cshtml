@@ -1,9 +1,9 @@
-﻿@using DTOs
+﻿
 @model CategoryDto
-@{
-    Layout="_Layout";
-}
-<h1>Add Category</h1>
+
+@inject IViewLocalizer localizer
+
+<h1 style="color:#0d6efd">@localizer["Add New Category"]</h1>
 <form method="post" asp-controller="Category" asp-action="Add" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="NameAR"></label>
@@ -16,6 +16,6 @@
         <span asp-validation-for="NameEN" class="validation"></span>
     </div>
     
-    <input type="submit" value="Add" class="btn btn-primary" />
+    <input type="submit" value="@localizer["Add"]" class="btn btn-primary" />
     
 </form>

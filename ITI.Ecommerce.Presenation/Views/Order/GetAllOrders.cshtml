@@ -1,17 +1,16 @@
-﻿@using DTOs
-@model List<OrderDto>
-
-<h1>Test GetAllOrders</h1>
-<a class="btn btn-primary" asp-controller="Order" asp-action="Add">Add New Order</a>
+﻿@model List<OrderDto>
+@inject IViewLocalizer localizer
+<h1 style="color:#0d6efd"> @localizer["All Orders"]</h1>
+@*<a class="btn btn-primary" asp-controller="Order" asp-action="Add">Add New Order</a>*@
 <table class="table table-striped table-dark">
     <thead>
         <tr>
-            <th scope="col">Customer ID</th>
-            <th scope="col">Payment ID</th>
-            <th scope="col">Order Date</th>
-            <th scope="col">Shopping Cart ID</th>
-            <th scope="col">Update</th>
-            <th scope="col">Delete</th>
+            <th scope="col">@localizer["Customer"]</th>
+            <th scope="col">@localizer["Payment ID"]</th>
+            <th scope="col">@localizer["Order Date"]</th>
+            <th scope="col">@localizer["Shopping Cart ID"]</th>
+            <th scope="col">@localizer["Update"]</th>
+            <th scope="col">@localizer["Delete"]</th>
         </tr>
     </thead>
     <tbody>
@@ -23,9 +22,9 @@
                 <td>@order.OrderDate</td>
                 <td>@order.ShoppingCartId</td>
                 <td>
-                    <a class="btn btn-primary" asp-controller="Order" asp-action="Update" asp-route-id="@order.ID">Update</a>
+                    <a class="btn btn-primary" asp-controller="Order" asp-action="Update" asp-route-id="@order.ID">@localizer["Update"]</a>
                 </td>
-                <td><a class="btn btn-danger" asp-controller="Order" asp-action="Delete" asp-route-id="@order.ID">Delete</a></td>
+                <td><a class="btn btn-danger" asp-controller="Order" asp-action="Delete" asp-route-id="@order.ID">@localizer["Delete"]</a></td>
             </tr>
         }
     </tbody>

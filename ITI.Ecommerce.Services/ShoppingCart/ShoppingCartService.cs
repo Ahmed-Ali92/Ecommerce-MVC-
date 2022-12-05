@@ -9,9 +9,9 @@ namespace ITI.Ecommerce.Services
         private readonly ApplicationDbContext _context ;
 
         //Edit Constructor
-        public ShoppingCartService()
+        public ShoppingCartService(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         public async Task add(ShoppingCartDto shoppingCartDto)

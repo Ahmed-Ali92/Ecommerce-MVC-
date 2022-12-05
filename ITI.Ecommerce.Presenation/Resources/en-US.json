@@ -43,8 +43,14 @@
   "Confirm Password": "Confirm Password",
   "Role Name": "Role Name",
   "Login Page": "Login Page",
-  "Sign Up Page": "Sign Up Page"
-
-
-
+  "Sign Up Page": "Sign Up Page",
+  "Add New Category": "Add New Category",
+  "View All Category": "View All Category",
+  "Categories": "Categories",
+  "Orders": "Orders",
+  "View All Orders": "View All Orders",
+  "All Orders": "All Orders",
+  "Products": "Products",
+  "Users": "Users",
+  "Customers": "Customers"
 }

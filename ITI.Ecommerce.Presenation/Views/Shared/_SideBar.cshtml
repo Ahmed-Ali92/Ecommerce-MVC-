@@ -21,30 +21,49 @@
                 </div>
             <div class="navbar-nav w-100">
                 <div class="nav-item dropdown">
-                @*User Option*@
+
+                    @*Category Options*@
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-people-fill me-2"></i>@localizer["User"]</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                            <a asp-controller="User" asp-action="SignUp" class="nav-item nav-link"><i class="bi bi-person-plus-fill me-2"></i>@localizer["Add User"]</a>
-                            <a asp-controller="Role" asp-action="Add" class="nav-item nav-link"><i class="bi bi-asterisk me-2"></i>@localizer["Add Role"]</a>
-                    
-                            </div>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-tags-fill me-2"></i>@localizer["Categories"]</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-controller="Category" asp-action="Add" class="nav-item nav-link"><i class="bi bi-plus-circle-fill me-2"></i>@localizer["Add New Category"]</a>
+                            <a asp-controller="Category" asp-action="GetAllCategories" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>@localizer["View All Category"]</a>
+@*                            <a asp-controller="Category" asp-action="GetCategoryByID" class="nav-item nav-link"><i class="bi bi-image-fill me-2"></i>@localizer["Add New Images"]</a>
+*@                        </div>
                     </div>
-      
                         @*Product Options*@
                         <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-diagram-3-fill me-2"></i>@localizer["Product"]</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-diagram-3-fill me-2"></i>@localizer["Products"]</a>
                             <div class="dropdown-menu bg-transparent border-0">
                             <a asp-controller="Product" asp-action="Add" class="nav-item nav-link"><i class="bi bi-plus-circle-fill me-2"></i>@localizer["Add New Product"]</a>
                                 <a asp-controller="Product" asp-action="GetAll" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>@localizer["View All Products"]</a>
                                 <a asp-controller="Product" asp-action="AddProductImages" class="nav-item nav-link"><i class="bi bi-image-fill me-2"></i>@localizer["Add New Images"]</a>
                             </div>
                         </div>
+                            @*×Order Options*@
+                        <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-cart-fill me-2"></i>@localizer["Orders"]</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-controller="Order" asp-action="GetAllOrders" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>@localizer["View All Orders"]</a>@*
+                                <a asp-controller="Product" asp-action="GetAll" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>@localizer["View All Products"]</a>
+                                <a asp-controller="Product" asp-action="AddProductImages" class="nav-item nav-link"><i class="bi bi-image-fill me-2"></i>@localizer["Add New Images"]</a>*@
+                            </div>
+                        </div>
                     @*Customer Options*@
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-check-fill me-2"></i>@localizer["Customer"]</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-check-fill me-2"></i>@localizer["Customers"]</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a class="nav-item nav-link" asp-controller="Customer" asp-action="GetAllUser"> <i class="fa fa-chart-bar me-2"></i>@localizer["View All Users"]</a>
+                        </div>
+                    </div>
+
+                    @*User Option*@
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-people-fill me-2"></i>@localizer["Users"]</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-controller="User" asp-action="SignUp" class="nav-item nav-link"><i class="bi bi-person-plus-fill me-2"></i>@localizer["Add User"]</a>
+                            <a asp-controller="Role" asp-action="Add" class="nav-item nav-link"><i class="bi bi-asterisk me-2"></i>@localizer["Add Role"]</a>
+
                         </div>
                     </div>
                  </div>
