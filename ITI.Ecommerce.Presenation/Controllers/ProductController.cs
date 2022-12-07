@@ -4,13 +4,13 @@ using ITI.Ecommerce.Services;
 using ITI.Ecommerce.Models;
 using X.PagedList;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using ITI.Ecommerce.Presenation;
+
+using System.Dynamic;
 using Microsoft.AspNetCore.Authorization;
-using System.Data;
 
 namespace ITI.Ecommerce.Presenation.Controllersss
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         public IProductService _pro;
@@ -30,6 +30,8 @@ namespace ITI.Ecommerce.Presenation.Controllersss
 
         public IActionResult Index()
         {
+
+
             return View();
         }
         [HttpGet]
@@ -74,8 +76,8 @@ namespace ITI.Ecommerce.Presenation.Controllersss
                 Quantity = dto.Quantity,
                 UnitPrice = dto.UnitPrice,
                 IsDeleted = false,
-                Discount=dto.Discount,
-                TotalPrice = dto.UnitPrice-dto.Discount,
+                Discount = dto.Discount,
+                TotalPrice = dto.UnitPrice - dto.Discount,
                 productImageList = images
 
             };
@@ -87,10 +89,13 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(int pageIndex = 1, int pageSize = 5)
+        public async Task<IActionResult> GetAll(int pageIndex = 1, int pageSize = 3)
         {
             var Proudicts = await _pro.GetAll();
             var Page = Proudicts.ToPagedList(pageIndex, pageSize);
+            var Cat = await _pro.GetAllCat();
+
+            ViewBag.Cat = Cat;
             return View(Page);
         }
         [HttpGet]
@@ -144,11 +149,11 @@ namespace ITI.Ecommerce.Presenation.Controllersss
 
             var c = await _img.GetByProductId(id);
 
-            var Prod = await _pro.GetById(id); 
+            var Prod = await _pro.GetById(id);
 
             //if (c != null)
             //{
-              foreach (var x in c)
+            foreach (var x in c)
             {
                 ViewBag.path = x.Path;
             }
@@ -164,9 +169,9 @@ namespace ITI.Ecommerce.Presenation.Controllersss
 
 
             return View(Prod);
-               
-           // }
-            
+
+            // }
+
         }
         [HttpPost]
         public IActionResult GetProductByCats(int id)
@@ -221,22 +226,60 @@ namespace ITI.Ecommerce.Presenation.Controllersss
             return RedirectToAction("Index", "Home");
         }
 
-         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> GetProductImages(int img)
         {
             var ProImage = await _img.GetByProductId(img);
             return View(ProImage);
         }
-       [HttpGet]
-      public async Task<IActionResult> DeleteProductImages(int im,int pro)
+        [HttpGet]
+        public async Task<IActionResult> DeleteProductImages(int im, int pro)
         {
-             _img.Delete(im);
+            _img.Delete(im);
             var ProImage = await _img.GetByProductId(im);
-           
-            return RedirectToAction("GetProductImages", new {img=pro});
+
+            return RedirectToAction("GetProductImages", new { img = pro });
+
         }
-        
+        [HttpGet]
 
 
+        [HttpPost]
+        public async Task<IActionResult> Filter(string fil, float price, int Cat, int pageIndex = 1, int pageSize = 10)
+        {
+
+            var Proudicts = await _pro.GetAllCat();
+            ViewBag.cat = Proudicts;
+            if (fil != null)
+            {
+                var pro = await _pro.FiletrProductBYname(fil);
+                var Page = pro.ToPagedList(pageIndex, pageSize);
+                return View("GetAll", Page);
+            }
+            else if (price != 0)
+            {
+                var pro = await _pro.GetByPrice(price);
+                var Page = pro.ToPagedList(pageIndex, pageSize);
+                return View("GetAll", Page);
+            }
+            else if (Cat != 0)
+            {
+                var pro = await _pro.GetByCategoryId(Cat);
+                var Page = pro.ToPagedList(pageIndex, pageSize);
+                return View("GetAll", Page);
+
+            }
+            else if (Cat == 0)
+            {
+                var pro = await _pro.GetAll();
+                var Page = pro.ToPagedList(pageIndex, pageSize);
+                return View("GetAll", Page);
+
+            }
+            return View("GetAll");
+        }
     }
+
+
+
 }

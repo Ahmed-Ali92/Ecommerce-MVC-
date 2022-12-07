@@ -16,5 +16,7 @@ namespace ITI.Ecommerce.Services
         Task<IEnumerable<ProductDto>> GetByCategoryId(int id);
         void Delete(int product);
         void Update(ProductDto productDto);
+        Task<IEnumerable<ProductDto>> GetByPrice(float id);
+        Task<IEnumerable<ProductDto>> FiletrProductBYname(string name);
     }
 }

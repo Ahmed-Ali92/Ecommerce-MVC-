@@ -1,8 +1,8 @@
 ﻿@inject IViewLocalizer localizer
  @model List<CustomerDto> 
 
-<div class="table-responsive">
-<table class="table table-dark">
+<div class="table-responsive m-1">
+<table class="table table-dark ">
     
   <thead> 
       <th>@localizer["Name"]</th>
@@ -23,9 +23,8 @@
       <td>@itm.Email</td>
       @*<td>@itm.FullName</td>*@
       <td>@itm.MobileNumber</td>
-                    <td><a class="btn btn-primary" asp-controller="Customer" asp-action="UpdateUser" asp-route-ID="@itm.ID">@localizer["Update"]</a></td>
-                    <td> <a class="btn btn-danger" asp-controller="Customer" asp-action="Delete" asp-route-ID="@itm.ID">@localizer["Delete"]</a>
-                    <td />
+                    <td><a class="btn text-white" style="background-color:#0d6efd" asp-controller="Customer" asp-action="UpdateUser" asp-route-ID="@itm.ID">@localizer["Update"]</a></td>
+                    <td> <a class="btn btn-danger" asp-controller="Customer" asp-action="Delete" asp-route-ID="@itm.ID">@localizer["Delete"]</a><td />
           </td>
 
      </tr>

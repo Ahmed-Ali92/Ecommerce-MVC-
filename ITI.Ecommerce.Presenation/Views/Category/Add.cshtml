@@ -2,7 +2,8 @@
 @model CategoryDto
 
 @inject IViewLocalizer localizer
-
+<div class="container-fluid row">
+    <div class="col-9 m-1">
 <h1 style="color:#0d6efd">@localizer["Add New Category"]</h1>
 <form method="post" asp-controller="Category" asp-action="Add" enctype="multipart/form-data">
     <div class="form-group">
@@ -15,7 +16,9 @@
         <input asp-for="NameEN" class="form-control" />
         <span asp-validation-for="NameEN" class="validation"></span>
     </div>
-    
-    <input type="submit" value="@localizer["Add"]" class="btn btn-primary" />
-    
+
+            <input type="submit" style="background-color:#0d6efd" value="@localizer["Add"]" class="btn text-white m-2" />
+  
 </form>
+    </div>
+</div>

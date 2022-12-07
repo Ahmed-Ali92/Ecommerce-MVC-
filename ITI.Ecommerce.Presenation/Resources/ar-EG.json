@@ -52,5 +52,11 @@
   "All Orders": "كل الطلبات",
   "Products": "المنتجات",
   "Users": "المستخدمين",
-  "Customers": "العملاء"
+  "Customers": "العملاء",
+  "Go to Home": "الصفحه الرئيسيه",
+  "Price less than": "السعر اقل من ",
+  "Search": "بحث",
+  "Payment ID": "رقم الدفع",
+  "Order Date": "تاريخ الطلب",
+  "Shopping Cart ID": "رقم عربة التسوق"
 }

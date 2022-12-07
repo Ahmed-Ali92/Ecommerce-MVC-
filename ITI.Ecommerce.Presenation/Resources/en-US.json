@@ -14,7 +14,7 @@
   "Address": "Address",
   "Email": "Email",
   "Mobile Number": "Mobile Number",
-  "Update": "Delete",
+  "Update": "Update",
   "Delete": "Delete",
   "Name Arabic": "Name Arabic",
   "Name English": "Name English",
@@ -52,5 +52,13 @@
   "All Orders": "All Orders",
   "Products": "Products",
   "Users": "Users",
-  "Customers": "Customers"
+  "Customers": "Customers",
+  "Go to Home": "Go to Home",
+  "Price less than": "Price less than",
+  "Search": "Search",
+  "Payment ID": "Payment ID",
+  "Order Date": "Order Date",
+  "Shopping Cart ID": "Shopping Cart ID"
+
+
 }

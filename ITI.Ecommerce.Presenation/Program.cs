@@ -23,7 +23,7 @@ namespace ITI.Ecommerce.Presenation
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer("Data Source=.;initial catalog = ITI.EcommerceDB; integrated security = true;");
+                options.UseLazyLoadingProxies().UseSqlServer("Data Source=.;initial catalog = ITI.EcommerceDB; integrated security = true;");
             });
 
             builder.Services.AddIdentity<Customer, IdentityRole>
