@@ -1,9 +1,12 @@
 ﻿using DTOs;
 using ITI.Ecommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace ITI.Ecommerce.Presenation.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryServie _categoryServie;
