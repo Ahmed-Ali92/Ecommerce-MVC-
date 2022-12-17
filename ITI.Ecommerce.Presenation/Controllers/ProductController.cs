@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ITI.Ecommerce.Presenation.Controllersss
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         public IProductService _pro;
@@ -277,6 +277,24 @@ namespace ITI.Ecommerce.Presenation.Controllersss
 
             }
             return View("GetAll");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllDeleted(int pageIndex = 1, int pageSize = 3)
+        {
+            var Proudicts = await _pro.GetAllDleted();
+            var Page = Proudicts.ToPagedList(pageIndex, pageSize);
+             
+            return View(Page);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Restore(int pro)
+        {
+            _pro.Restore(pro);
+
+
+            return RedirectToAction("GetAllDeleted","Product");
         }
     }
 

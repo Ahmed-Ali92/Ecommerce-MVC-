@@ -24,7 +24,7 @@ namespace ITI.Ecommerce.Presenation
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseLazyLoadingProxies().UseSqlServer("Data Source=.;initial catalog = ITI.EcommerceDB; integrated security = true;");
+                options.UseLazyLoadingProxies().UseSqlServer(@"Data Source=DESKTOP-7M0US3B\SQLEXPRESS01;initial catalog = ITI.EcommerceDB; integrated security = true;");
             });
          
 

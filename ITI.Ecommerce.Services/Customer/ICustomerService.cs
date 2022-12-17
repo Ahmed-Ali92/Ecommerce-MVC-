@@ -12,8 +12,10 @@ namespace ITI.Ecommerce.Services
     {
         Task add(CustomerDto customerDto);
         Task<IEnumerable<CustomerDto>> GetAll();
+        Task<IEnumerable<CustomerDto>> GetAllDeleted();
         Task<CustomerDto> GetById(string id);
         void Delete(String UserName);
         void Update(CustomerDto customerDto);
+        void Restore(string customerDto);
     }
 }

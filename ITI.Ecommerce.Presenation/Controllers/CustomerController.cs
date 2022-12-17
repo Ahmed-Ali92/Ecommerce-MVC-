@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ITI.Ecommerce.Presenation.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   //[Authorize(Roles = "Admin")]
     public class CustomerController : Controller
     {
         private readonly ICustomerService _customerService;
@@ -37,7 +37,10 @@ namespace ITI.Ecommerce.Presenation.Controllers
             return View(User);
         }
 
-        //[HttpGet]
+       [HttpGet]
+
+
+
         public async Task<IActionResult> UpdateUser(string ID)
         {
             var User = await _customerService.GetById(ID);
@@ -59,7 +62,32 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
             return RedirectToAction("GetAllUser", "Customer");
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllUserDeleted()
+        {
+            //List<CustomerDto> li=new List<CustomerDto>();
+            var User = await _customerService.GetAllDeleted();
+            // CustomerDto dto = new CustomerDto()
+            // {
+            //     NameAR = "احمد",
+            //     NameEN = "Ahmed",
+            //     FullName = "ahmed ali",
+            //     Address = "sohage",
+            //     Email = "ahmed@gmail",
+            //     MobileNumber = "12020920"
+            // };
+            // li.Add(dto);
+            //await  _customerService.GetAll();
+            return View(User);
+        }
 
+        public async Task<IActionResult> Restore(string ID)
+        {
+            _customerService.Restore(ID);
+
+            return RedirectToAction("GetAllUserDeleted", "Customer");
+
+        }
 
     }
 }
