@@ -2,6 +2,7 @@
 ﻿using ITI.Ecommerce.Models;
 using ITI.Ecommerce.Services;
 using JsonBasedLocalization.Web;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -25,11 +26,14 @@ namespace ITI.Ecommerce.Presenation
             {
                 options.UseLazyLoadingProxies().UseSqlServer("Data Source=.;initial catalog = ITI.EcommerceDB; integrated security = true;");
             });
+         
 
-            builder.Services.AddIdentity<Customer, IdentityRole>
-               ().AddEntityFrameworkStores<ApplicationDbContext>();
 
-           
+            builder.Services.AddIdentity<Customer, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+  
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddLocalization();

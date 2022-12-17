@@ -127,7 +127,7 @@
                                     }
                                     </td>*@
 
-                                    <td><a class="btn text-white" asp-controller="Product" asp-action="Update" asp-route-P="@itm.ID" style="background-color:#0d6efd">@localizer["Update"]</a></td>
+                                    <td><a class="btn text-white" asp-controller="Product" asp-action="Update" asp-route-pro="@itm.ID" style="background-color:#0d6efd">@localizer["Update"]</a></td>
                                     <td> <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-Prod="@itm.ID">@localizer["Delete"]</a> </td>
                                     <td> <a class="btn btn-success" asp-controller="Product" asp-action="GetProductByID" asp-route-id="@itm.ID">@localizer["Details"]</a> </td>
                                     <td> <a class="btn btn-warning " asp-controller="Product" asp-action="GetProductImages" asp-route-img="@itm.ID" >@localizer["Images"]</a> </td>

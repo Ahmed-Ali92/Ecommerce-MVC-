@@ -47,7 +47,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("SignUp", "UserMang");
+                    return RedirectToAction("Role", "Add");
                 }
 
             }

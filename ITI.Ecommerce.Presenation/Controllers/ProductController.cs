@@ -61,7 +61,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
                 images.Add(prodImg);
                 FileStream fs = new FileStream(
                     Path.Combine(Directory.GetCurrentDirectory(),
-                    "Content", "Images", "Product", NewName)
+                    "Content", "images", "Product", NewName)
                     , FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 file.CopyTo(fs);
                 fs.Position = 0;
@@ -99,11 +99,11 @@ namespace ITI.Ecommerce.Presenation.Controllersss
             return View(Page);
         }
         [HttpGet]
-        public async Task<IActionResult> Update(int P)
+        public async Task<IActionResult> Update(int pro)
         {
             var Proudicts = await _pro.GetAllCat();
             ViewBag.Cat = Proudicts.Select(i => new SelectListItem(i.NameEN, i.ID.ToString()));
-            var Prod = await _pro.GetById(P);
+            var Prod = await _pro.GetById(pro);
             List<IFormFile> li = new List<IFormFile>();
 
             //foreach(var i in Prod.productImageList)
@@ -130,7 +130,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
             return View(Prod);
         }
         [HttpPost]
-        public IActionResult UpdateValue(ProductDto pro)
+        public IActionResult Update(ProductDto pro)
         {
             _pro.Update(pro);
 
@@ -195,7 +195,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         //    return View(Product);
         //}
         [HttpGet]
-        public async Task<IActionResult> AddProductImages()
+        public async Task<IActionResult> AddProductImages(int img)
         {
             var Pro = await _pro.GetAll();
             ViewBag.Pro = Pro.Select(i => new SelectListItem(i.NameAR, i.ID.ToString()));

@@ -18,13 +18,13 @@ namespace ITI.Ecommerce.Services
         {
             ShoppingCart shoppingCart = new ShoppingCart()
             {
-                ProductId = shoppingCartDto.ProductId,
-                UnitPrice = shoppingCartDto.UnitPrice,
-                Quantity = shoppingCartDto.Quantity,
-                Discount = shoppingCartDto.Discount,
-                Total = shoppingCartDto.Total,
-                NameAR = shoppingCartDto.NameAR,
-                NameEN = shoppingCartDto.NameEN,
+                //ProductId = shoppingCartDto.ProductId,
+                //UnitPrice = shoppingCartDto.UnitPrice,
+                //Quantity = shoppingCartDto.Quantity,
+                //Discount = shoppingCartDto.Discount,
+                //Total = shoppingCartDto.Total,
+                //NameAR = shoppingCartDto.NameAR,
+                //NameEN = shoppingCartDto.NameEN,
                 IsDeleted = shoppingCartDto.IsDeleted
             };
 
@@ -56,13 +56,13 @@ namespace ITI.Ecommerce.Services
         {
             ShoppingCart shoppingCart = new ShoppingCart()
             {
-                ProductId = shoppingCartDto.ProductId,
-                UnitPrice = shoppingCartDto.UnitPrice,
-                Quantity = shoppingCartDto.Quantity,
-                Discount = shoppingCartDto.Discount,
-                Total = shoppingCartDto.Total,
-                NameAR = shoppingCartDto.NameAR,
-                NameEN = shoppingCartDto.NameEN,
+                //ProductId = shoppingCartDto.ProductId,
+                //UnitPrice = shoppingCartDto.UnitPrice,
+                //Quantity = shoppingCartDto.Quantity,
+                //Discount = shoppingCartDto.Discount,
+                //Total = shoppingCartDto.Total,
+                //NameAR = shoppingCartDto.NameAR,
+                //NameEN = shoppingCartDto.NameEN,
                 IsDeleted = true
             };
             _context.Update(shoppingCart);
@@ -79,11 +79,11 @@ namespace ITI.Ecommerce.Services
                 ShoppingCartDto shoppingCartDto = new ShoppingCartDto();
 
                 shoppingCartDto.ID = cart.ID;
-                shoppingCartDto.ProductId = cart.ProductId;
-                shoppingCartDto.UnitPrice = cart.UnitPrice;
-                shoppingCartDto.Quantity = cart.Quantity;
-                shoppingCartDto.Discount = cart.Discount;
-                shoppingCartDto.Total = cart.Total;
+                //shoppingCartDto.ProductId = cart.ProductId;
+                //shoppingCartDto.UnitPrice = cart.UnitPrice;
+                //shoppingCartDto.Quantity = cart.Quantity;
+                //shoppingCartDto.Discount = cart.Discount;
+                //shoppingCartDto.Total = cart.Total;
                 shoppingCartDto.IsDeleted = cart.IsDeleted;
                 shoppingCartes.Add(shoppingCartDto);
             }
@@ -104,11 +104,11 @@ namespace ITI.Ecommerce.Services
                 ShoppingCartDto shoppingCartDto = new ShoppingCartDto()
                 {
                     ID = item.ID,
-                    ProductId = item.ProductId,
-                    UnitPrice = item.UnitPrice,
-                    Quantity = item.Quantity,
-                    Discount = item.Discount,
-                    Total = item.Total,
+                    //ProductId = item.ProductId,
+                    //UnitPrice = item.UnitPrice,
+                    //Quantity = item.Quantity,
+                    //Discount = item.Discount,
+                    //Total = item.Total,
                     IsDeleted = item.IsDeleted,
 
                 };
@@ -122,13 +122,13 @@ namespace ITI.Ecommerce.Services
         {
             ShoppingCart shoppingCart = new ShoppingCart()
             {
-                ProductId = shoppingCartDto.ProductId,
-                UnitPrice = shoppingCartDto.UnitPrice,
-                Quantity = shoppingCartDto.Quantity,
-                Discount = shoppingCartDto.Discount,
-                Total = shoppingCartDto.Total,
-                NameAR = shoppingCartDto.NameAR,
-                NameEN = shoppingCartDto.NameEN,
+                //ProductId = shoppingCartDto.ProductId,
+                //UnitPrice = shoppingCartDto.UnitPrice,
+                //Quantity = shoppingCartDto.Quantity,
+                //Discount = shoppingCartDto.Discount,
+                //Total = shoppingCartDto.Total,
+                //NameAR = shoppingCartDto.NameAR,
+                //NameEN = shoppingCartDto.NameEN,
                 IsDeleted = shoppingCartDto.IsDeleted
             };
             _context.Update(shoppingCart);
