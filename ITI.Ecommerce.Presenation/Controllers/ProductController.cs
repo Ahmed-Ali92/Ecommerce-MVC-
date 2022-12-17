@@ -130,7 +130,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
             return View(Prod);
         }
         [HttpPost]
-        public IActionResult Update(ProductDto pro)
+        public IActionResult UpdateValue(ProductDto pro)
         {
             _pro.Update(pro);
 
