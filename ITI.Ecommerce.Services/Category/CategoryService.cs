@@ -147,5 +147,32 @@ namespace ITI.Ecommerce.Services
         //    var category = _context.Categories.FirstOrDefault(c => c.ID == id);
         //    return category;
         //}
+
+        public async Task<IEnumerable<CategoryDto>> GetAllDeleted()
+        {
+            List<CategoryDto> categoryDtosList = new List<CategoryDto>();
+            var categories = await _context.Categories.Where(c => c.IsDeleted == true).ToListAsync();
+            foreach (var category in categories)
+            {
+                CategoryDto categoryDto = new CategoryDto()
+                {
+                    ID = category.ID,
+                    NameAR = category.NameAR,
+                    NameEN = category.NameEN,
+                    IsDeleted = category.IsDeleted,
+                };
+                categoryDtosList.Add(categoryDto);
+            }
+            return categoryDtosList;
+        }
+        public void Restore(int id)
+        {
+            var categoryDto = _context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
+
+            categoryDto.IsDeleted = false;
+            _context.Update(categoryDto);
+            _context.SaveChanges();
+        }
+
     }
 }

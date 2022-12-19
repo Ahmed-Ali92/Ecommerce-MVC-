@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ITI.Ecommerce.Presenation.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryServie _categoryServie;
@@ -111,5 +111,18 @@ namespace ITI.Ecommerce.Presenation.Controllers
         //{
         //    return View();
         //}
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllDeletedCategories()
+        {
+            var categories = await _categoryServie.GetAllDeleted();
+            return View(categories);
+        }
+
+        public IActionResult Restore(int id)
+        {
+            _categoryServie.Restore(id);
+            return RedirectToAction("GetAllCategories");
+        }
     }
 }

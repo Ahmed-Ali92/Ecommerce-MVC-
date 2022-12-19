@@ -15,5 +15,8 @@ namespace ITI.Ecommerce.Services
         void Update( CategoryDto categoryDto);
         //Task Update( CategoryDto categoryDto);
         //void Update(int id ,string NameA , string NameE);
+
+        Task<IEnumerable<CategoryDto>> GetAllDeleted();
+        void Restore(int id);
     }
 }
