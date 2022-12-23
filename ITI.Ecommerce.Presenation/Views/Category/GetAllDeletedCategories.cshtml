@@ -14,7 +14,7 @@
             <th scope="col">@localizer["Name English"]</th>
             @*<th scope="col">@localizer["Update"]</th>
             <th scope="col">@localizer["Delete"]</th>*@
-            <th scope="col">Restore</th>
+            <th scope="col">@localizer["Restore"]</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
                     <a class="btn btn-primary" asp-controller="Category" asp-action="Update" asp-route-id="@Cat.ID">@localizer["Update"]</a>
                 </td>
                 <td><a class="btn btn-danger" asp-controller="Category" asp-action="CDelete" asp-route-id="@Cat.ID">@localizer["Delete"]</a></td>*@
-                <td><a class="btn btn-success" asp-controller="Category" asp-action="Restore" asp-route-id="@Cat.ID">Restore</a></td>
+                <td><a class="btn btn-success" asp-controller="Category" asp-action="Restore" asp-route-id="@Cat.ID">@localizer["Restore"]</a></td>
             </tr>
         }
     </tbody>

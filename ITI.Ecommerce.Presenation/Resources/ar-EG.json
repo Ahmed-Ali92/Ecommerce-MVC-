@@ -58,5 +58,10 @@
   "Search": "بحث",
   "Payment ID": "رقم الدفع",
   "Order Date": "تاريخ الطلب",
-  "Shopping Cart ID": "رقم عربة التسوق"
+  "Shopping Cart ID": "رقم عربة التسوق",
+
+  "Deleted Category": "الفئات المحذوفه",
+  "Deleted Products": "المنتجات المحذوفه",
+  "Deleted Users": "المستخدمين المحذوفين",
+  "Restore": "استعاده"
 }

@@ -58,7 +58,12 @@
   "Search": "Search",
   "Payment ID": "Payment ID",
   "Order Date": "Order Date",
-  "Shopping Cart ID": "Shopping Cart ID"
+  "Shopping Cart ID": "Shopping Cart ID",
+
+  "Deleted Category": "Deleted Category",
+  "Deleted Products": "Deleted Products",
+  "Deleted Users": "Deleted Users",
+  "Restore": "Restore"
 
 
 }

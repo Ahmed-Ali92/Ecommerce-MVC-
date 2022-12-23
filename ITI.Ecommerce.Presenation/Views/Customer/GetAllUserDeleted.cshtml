@@ -11,7 +11,7 @@
         <th>@localizer["Email"]</th>
      @*   <th>FullNamed</th>*@
         <th>@localizer["Mobile Number"]</th>
-        <th>Restore</th>
+        <th>@localizer["Restore"]</th>
          
   </thead>
   <tbody>
@@ -23,7 +23,7 @@
       <td>@itm.Email</td>
       @*<td>@itm.FullName</td>*@
       <td>@itm.MobileNumber</td>
-                    <td><a class="btn text-white" style="background-color:#0d6efd" asp-controller="Customer" asp-action="Restore" asp-route-ID="@itm.ID">Restore</a></td>
+                    <td><a class="btn text-white" style="background-color:#0d6efd" asp-controller="Customer" asp-action="Restore" asp-route-ID="@itm.ID">@localizer["Restore"]</a></td>
                    
            
 

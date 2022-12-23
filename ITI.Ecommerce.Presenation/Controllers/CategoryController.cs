@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ITI.Ecommerce.Presenation.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryServie _categoryServie;

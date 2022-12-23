@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ITI.Ecommerce.Presenation.Controllersss
 {
-   // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         public IProductService _pro;
