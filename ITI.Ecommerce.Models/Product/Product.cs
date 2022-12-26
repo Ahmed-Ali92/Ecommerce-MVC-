@@ -1,4 +1,10 @@
-﻿namespace ITI.Ecommerce.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ITI.Ecommerce.Models
 {
     public class Product
     {
@@ -17,6 +23,6 @@
         //Navigation property
         public virtual Category Category { get; set; }
         public virtual ICollection<ProductImage> productImageList { get; set; }
-        public virtual ICollection<ShoppingCart> ShoppingCartList { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

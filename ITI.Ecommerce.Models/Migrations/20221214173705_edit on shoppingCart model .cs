@@ -4,7 +4,7 @@
 
 namespace ITI.Ecommerce.Models.Migrations
 {
-    public partial class lastDBUpdate : Migration
+    public partial class editonshoppingCartmodel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

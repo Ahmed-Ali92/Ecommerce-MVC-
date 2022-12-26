@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ITI.Ecommerce.Models\ITI.Ecommerce.Models.csproj" />
-
   </ItemGroup>
 
 </Project>

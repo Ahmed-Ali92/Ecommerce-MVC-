@@ -10,7 +10,7 @@
     
     <div  class="sidebar pe-4 pb-3 ">
         <nav class="navbar bg-light navbar-light ">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+            <a asp-controller="Home" asp-action="index" class="navbar-brand mx-4 mb-3">
                 <h3 style="color:#0d6efd">B-TECH</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -28,7 +28,7 @@
                         <div class="dropdown-menu bg-transparent border-0">
                             <a asp-controller="Category" asp-action="Add" class="nav-item nav-link"><i class="bi bi-plus-circle-fill me-2"></i>@localizer["Add New Category"]</a>
                             <a asp-controller="Category" asp-action="GetAllCategories" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>@localizer["View All Category"]</a>
-                            <a asp-controller="Category" asp-action="GetAllDeletedCategories" class="nav-item nav-link"><i class="bi bi-trash3-fill me-2"></i>@localizer["Deleted Category"]</a>
+                            <a asp-controller="Category" asp-action="GetAllDeletedCategories" class="nav-item nav-link"><i class="bi bi-x-circle-fill me-2"></i>@localizer["Deleted Category"]</a>
 
 @*                            
     <a asp-controller="Category" asp-action="GetCategoryByID" class="nav-item nav-link"><i class="bi bi-image-fill me-2"></i>@localizer["Add New Images"]</a>
@@ -38,13 +38,13 @@
                         <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-diagram-3-fill me-2"></i>@localizer["Products"]</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                            <a asp-controller="Product" asp-action="Add" class="nav-item nav-link"><i class="bi bi-plus-circle-fill me-2"></i>@localizer["Add New Product"]</a>
-                                <a asp-controller="Product" asp-action="GetAll" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>@localizer["View All Products"]</a>
-                                <a asp-controller="Product" asp-action="AddProductImages" class="nav-item nav-link"><i class="bi bi-image-fill me-2"></i>@localizer["Add New Images"]</a>
-                            <a asp-controller="Product" asp-action="GetAllDeleted" class="nav-item nav-link"><i class="bi bi-trash3-fill me-2"></i>@localizer["Deleted Products"]</a>
+                            <a asp-controller="Product" asp-action="Add" style="font-size:.9rem;" class="nav-item nav-link "><i class="bi bi-plus-circle-fill me-2"></i>@localizer["Add New Product"]</a>
+                            <a asp-controller="Product" asp-action="GetAll" style="font-size:.9rem;" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>@localizer["View All Products"]</a>
+                            <a asp-controller="Product" asp-action="AddProductImages" style="font-size:.95rem;" class="nav-item nav-link"><i class="bi bi-image-fill me-2"></i>@localizer["Add New Images"]</a>
+                            <a asp-controller="Product" asp-action="GetAllDeleted" style="font-size:.95rem;" class="nav-item nav-link"><i class="bi bi-x-circle-fill me-2"></i>@localizer["Deleted Products"]</a>
                             </div>
                         </div>
-                            @*×Order Options*@
+                            @*Order Options*@
                         <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-cart-fill me-2"></i>@localizer["Orders"]</a>
                             <div class="dropdown-menu bg-transparent border-0">

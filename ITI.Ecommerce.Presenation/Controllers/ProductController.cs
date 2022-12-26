@@ -13,19 +13,19 @@ namespace ITI.Ecommerce.Presenation.Controllersss
     [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
-        public IProductService _pro;
-        public IProductImageService _img;
-        public IConfiguration con;
+        public IProductService _productService;
+        public IProductImageService _productImageService;
+        public IConfiguration _iconfiguration;
+        public ICategoryServie _categoryServie;
 
 
-
-        public ProductController(IProductService pro, IProductImageService img, IConfiguration _con)
+        public ProductController(IProductService productService, IProductImageService productImageService, IConfiguration iconfiguration, ICategoryServie categoryServie)
         {
 
-            _pro = pro;
-            _img = img;
-            con = _con;
-
+            _productService = productService;
+            _productImageService = productImageService;
+            _iconfiguration = iconfiguration;
+            _categoryServie = categoryServie;   
         }
 
         public IActionResult Index()
@@ -39,24 +39,24 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         {
 
 
-            var Proudicts = await _pro.GetAllCat();
-            ViewBag.Cat = Proudicts.Select(i => new SelectListItem(i.NameEN, i.ID.ToString()));
+            var categories = await _categoryServie.GetAll();
+            ViewBag.Cat = categories.Select(i => new SelectListItem(i.NameEN, i.ID.ToString()));
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Add(ProductModel dto)
 
         {
-            ICollection<ProductImage> images = new List<ProductImage>();
+            ICollection<ProductImageDto> images = new List<ProductImageDto>();
             foreach (IFormFile file in dto.Images)
             {
                 string NewName = Guid.NewGuid().ToString() + file.FileName;
 
-                ProductImage prodImg = new ProductImage()
+                ProductImageDto prodImg = new ProductImageDto()
                 {
                     Path = NewName,
                     ProductID = dto.ID,
-                    IsDeleted = false
+                    
                 };
                 images.Add(prodImg);
                 FileStream fs = new FileStream(
@@ -75,35 +75,35 @@ namespace ITI.Ecommerce.Presenation.Controllersss
                 CategoryID = dto.CategoryID,
                 Quantity = dto.Quantity,
                 UnitPrice = dto.UnitPrice,
-                IsDeleted = false,
+               
                 Discount = dto.Discount,
-                TotalPrice = dto.UnitPrice - dto.Discount,
-                productImageList = images
+                TotalPrice = dto.UnitPrice - ((dto.Discount/100)* dto.UnitPrice),
+                
 
             };
+            dtos.ProductImageList = images;
 
 
-
-            await _pro.add(dtos);
+            await _productService.add(dtos);
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll(int pageIndex = 1, int pageSize = 3)
         {
-            var Proudicts = await _pro.GetAll();
+            var Proudicts = await _productService.GetAll();
             var Page = Proudicts.ToPagedList(pageIndex, pageSize);
-            var Cat = await _pro.GetAllCat();
+            var categories = await _categoryServie.GetAll();
 
-            ViewBag.Cat = Cat;
+            ViewBag.Cat = categories;
             return View(Page);
         }
         [HttpGet]
         public async Task<IActionResult> Update(int pro)
         {
-            var Proudicts = await _pro.GetAllCat();
-            ViewBag.Cat = Proudicts.Select(i => new SelectListItem(i.NameEN, i.ID.ToString()));
-            var Prod = await _pro.GetById(pro);
+            var categories = await _categoryServie.GetAll();
+            ViewBag.Cat = categories.Select(i => new SelectListItem(i.NameEN, i.ID.ToString()));
+            var Prod = await _productService.GetById(pro);
             List<IFormFile> li = new List<IFormFile>();
 
             //foreach(var i in Prod.productImageList)
@@ -132,14 +132,14 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         [HttpPost]
         public IActionResult UpdateValue(ProductDto pro)
         {
-            _pro.Update(pro);
+            _productService.Update(pro);
 
             return RedirectToAction("GetAll", "Product");
         }
         public IActionResult Delete(int prod)
         {
 
-            _pro.Delete(prod);
+            _productService.Delete(prod);
             return RedirectToAction("GetAll", "Product");
 
         }
@@ -147,9 +147,9 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         public async Task<IActionResult> GetProductByID(int id)
         {
 
-            var c = await _img.GetByProductId(id);
+            var c = await _productImageService.GetByProductId(id);
 
-            var Prod = await _pro.GetById(id);
+            var Prod = await _productService.GetById(id);
 
             //if (c != null)
             //{
@@ -197,7 +197,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         [HttpGet]
         public async Task<IActionResult> AddProductImages(int img)
         {
-            var Pro = await _pro.GetAll();
+            var Pro = await _productService.GetAll();
             ViewBag.Pro = Pro.Select(i => new SelectListItem(i.NameAR, i.ID.ToString()));
             return View();
         }
@@ -211,9 +211,9 @@ namespace ITI.Ecommerce.Presenation.Controllersss
             {
                 Path = NewName,
                 ProductID = img.ProductID,
-                IsDeleted = false
+               
             };
-            await _img.add(prodImg);
+            await _productImageService.add(prodImg);
 
             FileStream fs = new FileStream(
               Path.Combine(Directory.GetCurrentDirectory(),
@@ -229,14 +229,14 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         [HttpGet]
         public async Task<IActionResult> GetProductImages(int img)
         {
-            var ProImage = await _img.GetByProductId(img);
+            var ProImage = await _productImageService.GetByProductId(img);
             return View(ProImage);
         }
         [HttpGet]
         public async Task<IActionResult> DeleteProductImages(int im, int pro)
         {
-            _img.Delete(im);
-            var ProImage = await _img.GetByProductId(im);
+            _productImageService.Delete(im);
+            var ProImage = await _productImageService.GetByProductId(im);
 
             return RedirectToAction("GetProductImages", new { img = pro });
 
@@ -248,30 +248,30 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         public async Task<IActionResult> Filter(string fil, float price, int Cat, int pageIndex = 1, int pageSize = 10)
         {
 
-            var Proudicts = await _pro.GetAllCat();
-            ViewBag.cat = Proudicts;
+            var categories = await _categoryServie.GetAll();
+            ViewBag.cat = categories;
             if (fil != null)
             {
-                var pro = await _pro.FiletrProductBYname(fil);
+                var pro = await _productService.FiletrProductByName(fil);
                 var Page = pro.ToPagedList(pageIndex, pageSize);
                 return View("GetAll", Page);
             }
             else if (price != 0)
             {
-                var pro = await _pro.GetByPrice(price);
+                var pro = await _productService.GetByPrice(price);
                 var Page = pro.ToPagedList(pageIndex, pageSize);
                 return View("GetAll", Page);
             }
             else if (Cat != 0)
             {
-                var pro = await _pro.GetByCategoryId(Cat);
+                var pro = await _productService.GetByCategoryId(Cat);
                 var Page = pro.ToPagedList(pageIndex, pageSize);
                 return View("GetAll", Page);
 
             }
             else if (Cat == 0)
             {
-                var pro = await _pro.GetAll();
+                var pro = await _productService.GetAll();
                 var Page = pro.ToPagedList(pageIndex, pageSize);
                 return View("GetAll", Page);
 
@@ -282,7 +282,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         [HttpGet]
         public async Task<IActionResult> GetAllDeleted(int pageIndex = 1, int pageSize = 3)
         {
-            var Proudicts = await _pro.GetAllDleted();
+            var Proudicts = await _productService.GetAllDleted();
             var Page = Proudicts.ToPagedList(pageIndex, pageSize);
              
             return View(Page);
@@ -291,7 +291,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
         [HttpGet]
         public async Task<IActionResult> Restore(int pro)
         {
-            _pro.Restore(pro);
+            _productService.Restore(pro);
 
 
             return RedirectToAction("GetAllDeleted","Product");

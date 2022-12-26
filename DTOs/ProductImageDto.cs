@@ -15,6 +15,6 @@ namespace DTOs
         public  string Path { get; set; }
         [Display(Name = "Product")]
         public int ProductID { get; set; }
-        public bool IsDeleted { get; set; }
+        
     }
 }

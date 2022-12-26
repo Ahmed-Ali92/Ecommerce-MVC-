@@ -25,9 +25,9 @@ namespace DTOs
 
         public string NameAR { set; get; }
         public string NameEN { set; get; }
-        public bool IsDeleted { set; get; }
+  
         public DateTime DateEntered { get; set; }
 
-        public ICollection<OrderDto> orderList { get; set; }
+    
     }
 }

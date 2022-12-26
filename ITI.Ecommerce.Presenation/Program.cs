@@ -24,7 +24,7 @@ namespace ITI.Ecommerce.Presenation
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseLazyLoadingProxies().UseSqlServer(@"Data Source=DESKTOP-7M0US3B\SQLEXPRESS01;initial catalog = ITI.EcommerceDB; integrated security = true;");
+                options.UseLazyLoadingProxies().UseSqlServer(@"Data Source=.;initial catalog = ITI.EcommerceDB; integrated security = true;");
             });
          
 
@@ -63,7 +63,7 @@ namespace ITI.Ecommerce.Presenation
             builder.Services.AddTransient<ICategoryServie, CategoryService>();
            
             builder.Services.AddTransient<IPaymentService, PaymentService>();
-            builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
+        
             builder.Services.Configure<IdentityOptions>(options =>
             {
                 options.User.AllowedUserNameCharacters = string.Empty;
@@ -90,8 +90,7 @@ namespace ITI.Ecommerce.Presenation
                 "Content"))
             });
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+           
             var supportedCultures = new[] { "en-US", "ar-EG" };
             var localizationOptions = new RequestLocalizationOptions()
                 .SetDefaultCulture(supportedCultures[0])
@@ -99,6 +98,11 @@ namespace ITI.Ecommerce.Presenation
                 .AddSupportedUICultures(supportedCultures);
 
             app.UseRequestLocalization(localizationOptions);
+
+
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllerRoute("main", "{controller=Home}/{action=index}");
 

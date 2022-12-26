@@ -12,19 +12,16 @@ namespace ITI.Ecommerce.Services
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext _context;
-        public ProductService(ApplicationDbContext cont)
+        private readonly IProductImageService _productImageService;
+        public ProductService(ApplicationDbContext context, IProductImageService productImageService)
         {
-            _context = cont;
+            _context = context;
+            _productImageService = productImageService; 
         }
 
         public async Task add(ProductDto productDto)
         {
-            //ICollection<ProductImage> col=new List<ProductImage>();
-
-            //foreach(var pr in productDto.productImageList)
-            //{
-            //    col.Add(pr);
-            //}
+            
             Product product = new Product()
             {
 
@@ -36,45 +33,32 @@ namespace ITI.Ecommerce.Services
                 UnitPrice = productDto.UnitPrice,
                 Discount = productDto.Discount,
                 TotalPrice = productDto.TotalPrice,
-                IsDeleted = productDto.IsDeleted,
                 Brand = productDto.Brand,
-                productImageList = productDto.productImageList
-
             };
-
             await _context.Products.AddAsync(product);
+            _context.SaveChanges();
+            foreach (var img in productDto.ProductImageList)
+            {
+                img.ProductID = product.ID;
+               await _productImageService.add(img);
+            }
+         
             _context.SaveChanges();
         }
 
         public void Delete(int product)
         {
-            //Product product = new Product()
-            //{
-            //    ID = productDto.ID,
-            //    NameAR = productDto.NameAR,
-            //    NameEN = productDto.NameEN,
-            //    Description = productDto.Description,
-            //    CategoryID = productDto.CategoryID,
-            //    Quantity = productDto.Quantity,
-            //    UnitPrice = productDto.UnitPrice,
-            //    Discount = productDto.Discount,
-            //    TotalPrice = productDto.TotalPrice,
-            //    Brand = productDto.Brand,
-            //    IsDeleted = true
-
-            //};
             var Product = _context.Products.First(p => p.ID == product);
             Product.IsDeleted = true;
             _context.SaveChanges();
 
         }
 
-        public async Task<IEnumerable<ProductDto>> FiletrProductBYname(string name)
+        public async Task<IEnumerable<ProductDto>> FiletrProductByName(string name)
         {
             List<ProductDto> productDtoList = new List<ProductDto>();
 
             var products = await _context.Products.Where(p => p.IsDeleted == false && p.NameEN.Contains(name)).ToListAsync();
-
             foreach (var product in products)
             {
                 ProductDto productDto = new ProductDto()
@@ -89,12 +73,23 @@ namespace ITI.Ecommerce.Services
                     Discount = product.Discount,
                     TotalPrice = product.TotalPrice,
                     Brand = product.Brand,
-                    IsDeleted = product.IsDeleted,
-
-
 
                 };
+                var productImgList = await _context.ProductImages.Where(i => i.ProductID == product.ID).ToListAsync();
+                var ProductImgDtoList = new List<ProductImageDto>();
+                foreach (var img in productImgList)
+                {
+                    var imgDto = new ProductImageDto()
+                    {
+                        ID = img.ID,
+                        Path = img.Path,
+                        ProductID = img.ProductID,
+                    };
+                    ProductImgDtoList.Add(imgDto);
+                }
+                productDto.ProductImageList = ProductImgDtoList;
                 productDtoList.Add(productDto);
+
 
             }
 
@@ -105,7 +100,7 @@ namespace ITI.Ecommerce.Services
         {
             List<ProductDto> productDtoList = new List<ProductDto>();
 
-            var products = await _context.Products.Where(p => p.IsDeleted == false).ToListAsync();
+            var products = await _context.Products.Where(p => p.IsDeleted == false).Distinct().ToListAsync();
 
             foreach (var product in products)
             {
@@ -121,38 +116,49 @@ namespace ITI.Ecommerce.Services
                     Discount = product.Discount,
                     TotalPrice = product.TotalPrice,
                     Brand = product.Brand,
-                    IsDeleted = product.IsDeleted,
-
-                    productImageList = product.productImageList
 
                 };
-                productDtoList.Add(productDto);
-
-            }
-
-            return productDtoList;
-        }
-
-        public async Task<IEnumerable<CategoryDto>> GetAllCat()
-        {
-            List<CategoryDto> productDtoList = new List<CategoryDto>();
-
-            var products = await _context.Categories.Where(p => p.IsDeleted == false).ToListAsync();
-
-            foreach (var product in products)
-            {
-                CategoryDto productDto = new CategoryDto()
+                var productImgList = await _context.ProductImages.Where(i => i.ProductID == product.ID).ToListAsync();
+                var ProductImgDtoList = new List<ProductImageDto>();
+                foreach (var img in productImgList)
                 {
-                    ID = product.ID,
-                    NameAR = product.NameAR,
-                    NameEN = product.NameEN,
-                };
+                    var imgDto = new ProductImageDto()
+                    {
+                        ID = img.ID,
+                        Path = img.Path,
+                        ProductID = img.ProductID,
+                    };
+                    ProductImgDtoList.Add(imgDto);
+                }
+                productDto.ProductImageList = ProductImgDtoList;
                 productDtoList.Add(productDto);
+
 
             }
 
             return productDtoList;
         }
+
+        //public async Task<IEnumerable<CategoryDto>> GetAllCat()
+        //{
+        //    List<CategoryDto> productDtoList = new List<CategoryDto>();
+
+        //    var products = await _context.Categories.Where(p => p.IsDeleted == false).ToListAsync();
+
+        //    foreach (var product in products)
+        //    {
+        //        CategoryDto productDto = new CategoryDto()
+        //        {
+        //            ID = product.ID,
+        //            NameAR = product.NameAR,
+        //            NameEN = product.NameEN,
+        //        };
+        //        productDtoList.Add(productDto);
+
+        //    }
+
+        //    return productDtoList;
+        //}
 
         public async Task<IEnumerable<ProductDto>> GetAllDleted()
         {
@@ -174,11 +180,21 @@ namespace ITI.Ecommerce.Services
                     Discount = product.Discount,
                     TotalPrice = product.TotalPrice,
                     Brand = product.Brand,
-                    IsDeleted = product.IsDeleted,
-
-                    productImageList = product.productImageList
 
                 };
+                var productImgList = await _context.ProductImages.Where(i => i.ProductID == product.ID).ToListAsync();
+                var ProductImgDtoList = new List<ProductImageDto>();
+                foreach (var img in productImgList)
+                {
+                    var imgDto = new ProductImageDto()
+                    {
+                        ID = img.ID,
+                        Path = img.Path,
+                        ProductID = img.ProductID,
+                    };
+                    ProductImgDtoList.Add(imgDto);
+                }
+                productDto.ProductImageList = ProductImgDtoList;
                 productDtoList.Add(productDto);
 
             }
@@ -190,7 +206,7 @@ namespace ITI.Ecommerce.Services
         {
             List<ProductDto> productDtoList = new List<ProductDto>();
 
-            var products = await _context.Products.Where(p => p.IsDeleted == false && p.CategoryID == id).ToListAsync();
+            var products = await _context.Products.Where(p => p.IsDeleted == false && p.CategoryID == id).Distinct().ToListAsync();
 
             foreach (var product in products)
             {
@@ -206,24 +222,36 @@ namespace ITI.Ecommerce.Services
                     Discount = product.Discount,
                     TotalPrice = product.TotalPrice,
                     Brand = product.Brand,
-                    IsDeleted = product.IsDeleted,
+                   
 
 
 
                 };
+                var productImgList = await _context.ProductImages.Where(i => i.ProductID == product.ID).ToListAsync();
+                var ProductImgDtoList = new List<ProductImageDto>();
+                foreach (var img in productImgList)
+                {
+                    var imgDto = new ProductImageDto()
+                    {
+                        ID = img.ID,
+                        Path = img.Path,
+                        ProductID = img.ProductID,
+                    };
+                    ProductImgDtoList.Add(imgDto);
+                }
+                productDto.ProductImageList = ProductImgDtoList;
                 productDtoList.Add(productDto);
 
             }
 
             return productDtoList;
         }
-
         public async Task<ProductDto> GetById(int id)
         {
-            var product = await _context.Products.SingleOrDefaultAsync(p => p.ID == id);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.ID == id && p.IsDeleted == false);
             if (product == null)
             {
-                throw new Exception("this product is not found ");
+                return null;
             }
             else
             {
@@ -239,11 +267,26 @@ namespace ITI.Ecommerce.Services
                     Quantity = product.Quantity,
                     Discount = product.Discount,
                     TotalPrice = product.TotalPrice,
-                    IsDeleted = product.IsDeleted,
+                    //IsDeleted = product.IsDeleted,
                     Brand = product.Brand,
-                    productImageList = product.productImageList
 
                 };
+
+                var productImgList = await _context.ProductImages.Where(i => i.ProductID == product.ID).ToListAsync();
+                var ProductImgDtoList = new List<ProductImageDto>();
+                foreach (var img in productImgList)
+                {
+                    var imgDto = new ProductImageDto()
+                    {
+                        ID = img.ID,
+                        Path = img.Path,
+                        ProductID = img.ProductID,
+                    };
+                    ProductImgDtoList.Add(imgDto);
+                }
+                productDto.ProductImageList = ProductImgDtoList;
+
+
                 return productDto;
             }
         }
@@ -269,17 +312,27 @@ namespace ITI.Ecommerce.Services
                     Discount = product.Discount,
                     TotalPrice = product.TotalPrice,
                     Brand = product.Brand,
-                    IsDeleted = product.IsDeleted,
-
-
 
                 };
+                var productImgList = await _context.ProductImages.Where(i => i.ProductID == product.ID).ToListAsync();
+                var ProductImgDtoList = new List<ProductImageDto>();
+                foreach (var img in productImgList)
+                {
+                    var imgDto = new ProductImageDto()
+                    {
+                        ID = img.ID,
+                        Path = img.Path,
+                        ProductID = img.ProductID,
+                    };
+                    ProductImgDtoList.Add(imgDto);
+                }
+                productDto.ProductImageList = ProductImgDtoList;
                 productDtoList.Add(productDto);
+
 
             }
 
             return productDtoList;
-
         }
 
         public void Restore(int pro)
@@ -291,42 +344,38 @@ namespace ITI.Ecommerce.Services
 
         public void Update(ProductDto productDto)
         {
-            var x = _context.Products.FirstOrDefault(p => p.ID == productDto.ID);
+            var product = _context.Products.FirstOrDefault(p => p.ID == productDto.ID);
 
-            if (x != null)
+            if (product != null)
             {
-                x.NameAR = productDto.NameAR;
-                x.NameEN = productDto.NameEN;
-                x.Description = productDto.Description;
-                x.CategoryID = productDto.CategoryID;
-                x.Quantity = productDto.Quantity;
-                x.UnitPrice = productDto.UnitPrice;
-                x.Discount = productDto.Discount;
-                x.TotalPrice = productDto.UnitPrice - productDto.Discount;
-                x.IsDeleted = false;
-                x.Brand = productDto.Brand;
-                x.productImageList = productDto.productImageList;
+                product.NameAR = productDto.NameAR;
+                product.NameEN = productDto.NameEN;
+                product.Description = productDto.Description;
+                product.CategoryID = productDto.CategoryID;
+                product.Quantity = productDto.Quantity;
+                product.UnitPrice = productDto.UnitPrice;
+                product.Discount = productDto.Discount;
+                product.TotalPrice = productDto.UnitPrice - ((productDto.Discount / 100) * productDto.UnitPrice);
+                product.IsDeleted = false;
+                product.Brand = productDto.Brand;
+               
             }
+
+            var ProductImgDtoList = new List<ProductImage>();
+            foreach (var img in productDto.ProductImageList)
+            {
+                var imgDto = new ProductImage()
+                {
+                    ID = img.ID,
+                    Path = img.Path,
+                    ProductID = img.ProductID,
+                };
+                ProductImgDtoList.Add(imgDto);
+            }
+            product.productImageList = ProductImgDtoList;
             _context.SaveChanges();
 
-            //Product product = new Product()
-            //{
-            //    ID = productDto.ID,
-            //    NameAR = productDto.NameAR,
-            //    NameEN = productDto.NameEN,
-            //    Description = productDto.Description,
-            //    CategoryID = productDto.CategoryID,
-            //    Quantity = productDto.Quantity,
-            //    UnitPrice = productDto.UnitPrice,
-            //    Discount = productDto.Discount,
-            //    TotalPrice = productDto.TotalPrice-productDto.Discount,
-            //    IsDeleted = productDto.IsDeleted,
-            //    Brand= productDto.Brand,
-            //    productImageList=productDto.productImageList
-
-            //};
-
-            //_context.Update(product);
+           
 
         }
     }

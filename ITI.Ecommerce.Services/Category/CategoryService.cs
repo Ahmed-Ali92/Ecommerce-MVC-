@@ -18,7 +18,7 @@ namespace ITI.Ecommerce.Services
             {
                 NameAR = categoryDto.NameAR,
                 NameEN = categoryDto.NameEN,
-                IsDeleted = categoryDto.IsDeleted,
+                IsDeleted=false
             };
             await _context.Categories.AddAsync(category);
             _context.SaveChanges();
@@ -39,31 +39,12 @@ namespace ITI.Ecommerce.Services
         public void CDelete(int id)
         {
             var categoryDto = _context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
-            //Category category = new Category()
-            //{
-            //    ID = categoryDto.ID,
-            //    NameAR = categoryDto.NameAR,
-            //    NameEN = categoryDto.NameEN,
-            //    IsDeleted = true,
-            //};
+           
             categoryDto.IsDeleted = true;
             _context.Update(categoryDto);
             _context.SaveChanges();
         }
-        //public async Task<CategoryDto> CDelete(int id)
-        //{
-        //    var categoryDto = await _context.Categories.SingleOrDefaultAsync(c => c.ID == id);
-        //    Category category = new Category()
-        //    {
-        //        ID = categoryDto.ID,
-        //        NameAR = categoryDto.NameAR,
-        //        NameEN = categoryDto.NameEN,
-        //        IsDeleted = true,
-        //    };
-        //    return categoryDto;
-        //    _context.Update(category);
-        //    _context.SaveChanges();
-        //}
+     
 
         public async Task<IEnumerable<CategoryDto>> GetAll()
         {
@@ -76,7 +57,7 @@ namespace ITI.Ecommerce.Services
                     ID = category.ID,
                     NameAR = category.NameAR,
                     NameEN = category.NameEN,
-                    IsDeleted = category.IsDeleted,
+                   
                 };
                 categoryDtosList.Add(categoryDto);
             }
@@ -97,7 +78,7 @@ namespace ITI.Ecommerce.Services
                     ID = category.ID,
                     NameAR = category.NameAR,
                     NameEN = category.NameEN,
-                    IsDeleted = category.IsDeleted,
+                  
                 };
                 return categoryDto;
             }
@@ -106,47 +87,15 @@ namespace ITI.Ecommerce.Services
         public void Update(CategoryDto categoryDto)
         {
             var categoryD = _context.Categories.FirstOrDefault(c => c.ID == categoryDto.ID);
-            //_context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
+        
             categoryD.NameAR = categoryDto.NameAR;
             categoryD.NameEN = categoryDto.NameEN;
-            //categoryD.ID = id;
-            //Category category = new Category()
-            //{
-            //    ID = categoryDto.ID,
-            //    NameAR = categoryDto.NameAR,
-            //    NameEN = categoryDto.NameEN,
-            //    IsDeleted = false,
-            //};
-
-            //_context.Update(category);
+        
             _context.SaveChanges();
         }
 
-        //public async Task Update(CategoryDto categoryDto)
-        //{
-        //    //var categoryD = _context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
-        //    //_context.Categories.AsNoTracking().FirstOrDefault(c => c.ID == id);
-        //    //categoryD.NameAR = categoryDto.NameAR;
-        //    //categoryD.NameEN = categoryDto.NameEN;
-        //    //categoryD.ID =id;
-        //    Category category = new Category()
-        //    {
-        //        ID = categoryDto.ID,
-        //        NameAR = categoryDto.NameAR,
-        //        NameEN = categoryDto.NameEN,
-        //        IsDeleted = false,
-        //    };
-
-        //    _context.Categories.Update(category);
-        //    _context.SaveChanges();
-        //}
-
-        //----------------------------------------------------------
-        //public Category CUpdate(int id)
-        //{
-        //    var category = _context.Categories.FirstOrDefault(c => c.ID == id);
-        //    return category;
-        //}
+      
+ 
 
         public async Task<IEnumerable<CategoryDto>> GetAllDeleted()
         {
@@ -159,7 +108,7 @@ namespace ITI.Ecommerce.Services
                     ID = category.ID,
                     NameAR = category.NameAR,
                     NameEN = category.NameEN,
-                    IsDeleted = category.IsDeleted,
+                 
                 };
                 categoryDtosList.Add(categoryDto);
             }

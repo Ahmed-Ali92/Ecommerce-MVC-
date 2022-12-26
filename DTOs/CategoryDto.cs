@@ -15,8 +15,6 @@ namespace DTOs
         public string NameAR { set; get; }
         [Display(Name = "Name English")]
         public string NameEN { set; get; }
-        public bool IsDeleted { set; get; }
-
-        public ICollection<ProductDto> ProductList { get; set; }
-    }
+      
+   }
 }

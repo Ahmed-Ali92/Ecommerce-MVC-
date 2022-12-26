@@ -24,10 +24,7 @@ namespace ITI.Ecommerce.Services
             _context.SaveChanges();
         }
 
-        //public void Delete(PaymentDto paymentDto)
-        //{
-        //    throw new NotImplementedException();
-        //}
+       
 
         public async Task<IEnumerable<PaymentDto>> GetAll()
         {

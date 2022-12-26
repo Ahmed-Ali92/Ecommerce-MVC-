@@ -9,7 +9,6 @@
                 <th scope="col">Customer ID</th>
                 <th scope="col">Payment ID</th>
                 <th scope="col">Order Date</th>
-                <th scope="col">Shopping Cart ID</th>
                 <th scope="col">Update</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -19,7 +18,7 @@
                 <td>@Model.CustomerId</td>
                 <td>@Model.PaymentId</td>
                 <td>@Model.OrderDate</td>
-                <td>@Model.ShoppingCartId</td>
+              
                 <td>
                     <a class="btn btn-primary" asp-controller="order" asp-action="Update" asp-route-id="@Model.ID">Update</a>
                 </td>

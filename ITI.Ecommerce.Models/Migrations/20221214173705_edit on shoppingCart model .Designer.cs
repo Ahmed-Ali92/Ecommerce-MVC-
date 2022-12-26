@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITI.Ecommerce.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221217123856_last DB Update")]
-    partial class lastDBUpdate
+    [Migration("20221214173705_edit on shoppingCart model ")]
+    partial class editonshoppingCartmodel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

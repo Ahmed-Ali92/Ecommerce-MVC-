@@ -47,7 +47,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Role", "Add");
+                    return RedirectToAction("Home", "index");
                 }
 
             }
