@@ -21,19 +21,9 @@ namespace ITI.Ecommerce.Presenation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllUser()
         {
-            //List<CustomerDto> li=new List<CustomerDto>();
+           
             var User = await _customerService.GetAll();
-            // CustomerDto dto = new CustomerDto()
-            // {
-            //     NameAR = "احمد",
-            //     NameEN = "Ahmed",
-            //     FullName = "ahmed ali",
-            //     Address = "sohage",
-            //     Email = "ahmed@gmail",
-            //     MobileNumber = "12020920"
-            // };
-            // li.Add(dto);
-            //await  _customerService.GetAll();
+          
             return View(User);
         }
 
@@ -54,7 +44,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
             return RedirectToAction("GetAllUser","Customer");
         }
-        //[Route("{ID:Guid}")]
+       
       
         public IActionResult Delete(string ID)
         {
@@ -65,19 +55,9 @@ namespace ITI.Ecommerce.Presenation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllUserDeleted()
         {
-            //List<CustomerDto> li=new List<CustomerDto>();
+            
             var User = await _customerService.GetAllDeleted();
-            // CustomerDto dto = new CustomerDto()
-            // {
-            //     NameAR = "احمد",
-            //     NameEN = "Ahmed",
-            //     FullName = "ahmed ali",
-            //     Address = "sohage",
-            //     Email = "ahmed@gmail",
-            //     MobileNumber = "12020920"
-            // };
-            // li.Add(dto);
-            //await  _customerService.GetAll();
+           
             return View(User);
         }
 

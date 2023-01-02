@@ -139,26 +139,6 @@ namespace ITI.Ecommerce.Services
             return productDtoList;
         }
 
-        //public async Task<IEnumerable<CategoryDto>> GetAllCat()
-        //{
-        //    List<CategoryDto> productDtoList = new List<CategoryDto>();
-
-        //    var products = await _context.Categories.Where(p => p.IsDeleted == false).ToListAsync();
-
-        //    foreach (var product in products)
-        //    {
-        //        CategoryDto productDto = new CategoryDto()
-        //        {
-        //            ID = product.ID,
-        //            NameAR = product.NameAR,
-        //            NameEN = product.NameEN,
-        //        };
-        //        productDtoList.Add(productDto);
-
-        //    }
-
-        //    return productDtoList;
-        //}
 
         public async Task<IEnumerable<ProductDto>> GetAllDleted()
         {
@@ -267,7 +247,7 @@ namespace ITI.Ecommerce.Services
                     Quantity = product.Quantity,
                     Discount = product.Discount,
                     TotalPrice = product.TotalPrice,
-                    //IsDeleted = product.IsDeleted,
+                    
                     Brand = product.Brand,
 
                 };

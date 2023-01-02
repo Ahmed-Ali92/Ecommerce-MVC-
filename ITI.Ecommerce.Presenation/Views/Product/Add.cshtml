@@ -23,12 +23,6 @@
         <span asp-validation-for="Description"></span>
     </div>
 
-   @* <div class="form-group">
-        <label asp-for="CategoryID"></label>
-        <textarea asp-for="CategoryID" class="form-control">
-         </textarea>
-        <span asp-validation-for="CategoryID"></span>
-    </div>*@
        <div class="form-group">
         <label asp-for="CategoryID"></label>
         <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.Cat" required>

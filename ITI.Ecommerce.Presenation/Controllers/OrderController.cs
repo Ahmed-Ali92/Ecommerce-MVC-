@@ -24,24 +24,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
            
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Add()
-        //{
-        //    var Customers = await _customerService.GetAll();
-        //    ViewBag.Customer = Customers.Select(i => new SelectListItem(i.FullName, i.ID.ToString()));
-
-        //    var Payments = await _paymentService.GetAll();
-        //    ViewBag.Payment = Payments.Select(i => new SelectListItem(i.ID.ToString(), i.ID.ToString()));
-
-        //    var ShoppingCarts = await _shoppingCartService.GetAll();
-        //    ViewBag.ShoppingCart = ShoppingCarts.Select(i => new SelectListItem(i.ID.ToString(), i.ID.ToString()));
-        //    return View();
-        //}
-        //public async Task<IActionResult> Add(OrderDto orderDto)
-        //{
-        //    await _orderService.add(orderDto);
-        //    return RedirectToAction("GetAllOrders");
-        //}
+       
 
         public async Task<IActionResult> GetAllOrders()
         {
@@ -61,43 +44,41 @@ namespace ITI.Ecommerce.Presenation.Controllers
             return View(Order);
         }
 
-        //public IActionResult Delete(OrderDto orderDto)
-        //{
-        //    _orderService.Delete(orderDto);
-        //    return View();
-        //}
 
         public IActionResult Delete(int id)
         {
             _orderService.Delete(id);
             return RedirectToAction("GetAllOrders");
         }
-        //[HttpGet]
-        //public async Task<IActionResult> UpDate(int id)
-        //{
-        //    var order = await _orderService.GetById(id);
+      
 
-        //    var Customers = await _customerService.GetAll();
-        //    ViewBag.Customer = Customers.Select(i => new SelectListItem(i.FullName, i.ID.ToString()));
+        [HttpGet]
+        public async Task<IActionResult> GetAllDeliveredOrder()
+        {
 
-        //    var Payments = await _paymentService.GetAll();
-        //    ViewBag.Payment = Payments.Select(i => new SelectListItem(i.ID.ToString(), i.ID.ToString()));
+            var Orders = await _orderService.GetAllDelivered();
+            return View(Orders);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllPendingOrder()
+        {
 
-        //    var ShoppingCarts = await _shoppingCartService.GetAll();
-        //    ViewBag.ShoppingCart = ShoppingCarts.Select(i => new SelectListItem(i.ID.ToString(), i.ID.ToString()));
+            var Orders = await _orderService.GetAllPending();
+            return View(Orders);
+        }
 
-        //    return View(order);
-        //}
-        //[HttpPost]
-        //public IActionResult UpDate(OrderDto orderDto)
-        //{
-        //    _orderService.Update(orderDto);
-        //    return RedirectToAction("GetAllOrders");
-        //}
-        
+        public ActionResult Delivered(int id)
+        {
 
-        // GET: OrderController
+            _orderService.ChangeToDelivered(id);
+            return RedirectToAction("GetAllDeliveredOrder");
+        }
+
+
        
-
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }

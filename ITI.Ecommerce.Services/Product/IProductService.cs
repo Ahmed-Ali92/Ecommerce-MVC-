@@ -12,7 +12,7 @@ namespace ITI.Ecommerce.Services
         Task add(ProductDto productDto);
         Task<IEnumerable<ProductDto>> GetAll();
         Task<IEnumerable<ProductDto>> GetAllDleted();
-        //Task<IEnumerable<CategoryDto>> GetAllCat();
+        
         Task<ProductDto> GetById(int id);
         Task<IEnumerable<ProductDto>> GetByCategoryId(int id);
         void Delete(int product);

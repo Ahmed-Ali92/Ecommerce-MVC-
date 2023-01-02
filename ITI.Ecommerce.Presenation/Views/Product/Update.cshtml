@@ -36,12 +36,7 @@
                     </select>
                     <span asp-validation-for="CategoryID"></span>
                 </div>
-                @* <div class="form-group">
-                <label asp-for="CategoryID"></label>
-                <textarea asp-for="CategoryID" class="form-control">
-                </textarea>
-                <span asp-validation-for="CategoryID"></span>
-                </div>*@
+          
                 <div class="form-group">
                     <label asp-for="Quantity"></label>
                     <textarea asp-for="Quantity" class="form-control">
@@ -76,21 +71,9 @@
                 </div>
 
 
-                @* <div class="form-group">
-                <label asp-for="AuthorID"></label>
-                <select asp-for="AuthorID" class="form-control" asp-items="ViewBag.Authors">
-                </select>
-                <span asp-validation-for="AuthorID"></span>
-                </div>*@
-                @* <div class="form-group">
-                <label asp-for="productImageList"></label>
-                <input asp-for="productImageList" class="form-control" />
-                <span asp-validation-for="productImageList"></span>
-                </div>*@
+              
                 <input type="submit" value="@localizer["Update"]" class="btn text-white m-2" style="background-color:#0d6efd" />
-                @* <div>
-                <img id="loader" src="~/Content/Images/uploadloader.gif" style="display:none;"/>
-                </div>*@
+               
             </form>
         </div>
 

@@ -63,5 +63,10 @@
   "Deleted Category": "الفئات المحذوفه",
   "Deleted Products": "المنتجات المحذوفه",
   "Deleted Users": "المستخدمين المحذوفين",
-  "Restore": "استعاده"
+  "Restore": "استعاده",
+
+  "Status": "الحاله",
+  "Delivered Orders": "الطلبات المسلمه",
+  "Pending Orders": "الطلبات المعلقه",
+  "Delivery": "التوصيل"
 }

@@ -8,9 +8,12 @@ namespace ITI.Ecommerce.Services
         Task<IEnumerable<OrderDto>> GetAll();
         Task<IEnumerable<OrderDto>> GetByCustomerId(string CustomerId);
         Task<OrderDto> GetById(int id); 
-         //void Delete(OrderDto orderDto);
          void Delete(int id);
 
-        //void Update(OrderDto orderDto);
+        Task Update(OrderDto orderDto);
+
+        Task<IEnumerable<OrderDto>> GetAllPending();
+        Task<IEnumerable<OrderDto>> GetAllDelivered();
+        public void ChangeToDelivered(int orderid);
     }
 }

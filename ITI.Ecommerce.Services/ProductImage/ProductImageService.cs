@@ -32,16 +32,10 @@ namespace ITI.Ecommerce.Services
 
         public void Delete(int img)
         {
-            //ProductImage productImage = new ProductImage()
-            //{
-            //    ID = productImageDto.ID,
-            //    Path = productImageDto.Path,
-            //    ProductID = productImageDto.ProductID,
-            //    IsDeleted = true
-            //};
+         ;
             var x = _context.ProductImages.FirstOrDefault(p => p.ID == img);
             x.IsDeleted = true;
-           // _context.Update(productImage);
+           
             _context.SaveChanges();
         }
 

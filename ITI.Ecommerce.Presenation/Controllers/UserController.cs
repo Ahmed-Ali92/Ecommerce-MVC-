@@ -29,7 +29,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+      
         public IActionResult SignUp()
         {
             ViewBag.Roles = RoleManager.Roles
@@ -39,7 +39,7 @@ namespace ITI.Ecommerce.Presenation.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+       
         public async Task<IActionResult> SignUp(UserCreateModel model)
         {
             DateTime Date = DateTime.Now;

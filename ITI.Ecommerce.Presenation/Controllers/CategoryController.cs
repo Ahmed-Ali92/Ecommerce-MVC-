@@ -45,32 +45,17 @@ namespace ITI.Ecommerce.Presenation.Controllers
             ViewBag.Done=true;
             return View(category);
         }
-        //public IActionResult ConfirmDelete(int ID)
-        //{
-        //    var category = _categoryServie.Categories.SingleOrDefault(o => o.ID == id);
-        //    _categoryServie.Delete(category); ;
-        //    return RedirectToAction("GetAllCategories");
-        //}
-        //public IActionResult Delete(int id)
-        //{
-        //    _categoryServie.Delete();
-        //    return RedirectToAction("GetAllCategories");
-        //}
+      
         public IActionResult Delete(CategoryDto categoryDto)
         {
             _categoryServie.Delete(categoryDto);
             return RedirectToAction("GetAllCategories");
         }
-        //[HttpGet]
-        //public IActionResult CDelete(int id)
-        //{
-        //    var ca =_categoryServie.GetById(id);
-        //    return View(ca);
-        //}
+       
         public IActionResult CDelete(int id)
         {
             _categoryServie.CDelete(id);
-            //_categoryServie.Delete(ca);
+            
             return RedirectToAction("GetAllCategories");
         }
         [HttpGet]
@@ -79,38 +64,16 @@ namespace ITI.Ecommerce.Presenation.Controllers
             var category = await _categoryServie.GetById(id);
             return View(category);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> UpDate(CategoryDto categoryDto)
-        //{
-        //    //categoryDto.ID = id;
-        //    await _categoryServie.Update(categoryDto);
-        //    return RedirectToAction("GetAllCategories");
-        //}
+     
         [HttpPost]
         public IActionResult CUpDate(CategoryDto categoryDto)
         {
-            //categoryDto.ID = id;
+            
             _categoryServie.Update(categoryDto);
             return RedirectToAction("GetAllCategories");
         }
 
-        //[HttpGet]
-        //public IActionResult CUpDate(int id)
-        //{
-        //    var category =  _categoryServie.CUpdate(id);
-        //    return View(category);
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> UpDate(CategoryDto categoryDto)
-        //{
-        //    //categoryDto.ID = id;
-        //    await _categoryServie.Update(categoryDto);
-        //    return RedirectToAction("GetAllCategories");
-        //}
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        
 
         [HttpGet]
         public async Task<IActionResult> GetAllDeletedCategories()

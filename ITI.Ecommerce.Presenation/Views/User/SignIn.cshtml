@@ -24,6 +24,12 @@
        
         <span asp-validation-for="RememberMe"></span>
     </div>
+
+    <div class="d-flex justify-content-center">
+
+        <a asp-controller="User" asp-action="SignUp" style="margin-top: 10px; text-decoration: none">Create Account </a>
+    </div>
+
                 <input class="btn text-white mt-3 ms-5" style="background-color:#0d6efd" value="@localizer["Save"]" type="submit" />
 </form>
     </div>

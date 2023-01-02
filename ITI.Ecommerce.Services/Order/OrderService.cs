@@ -34,7 +34,8 @@ namespace ITI.Ecommerce.Services
                 var orderProduct = new OrderProduct()
                 {
                     OrderId = order.ID,
-                    ProductId = prd.ID
+                    ProductId = prd.ID,
+                    Quantity = prd.Quantity,
                 };
                 await _context.OrderProducts.AddAsync(orderProduct);
             }
@@ -73,12 +74,16 @@ namespace ITI.Ecommerce.Services
                 orderDto.PaymentId = order.PaymentId;
                 orderDto.OrderDate = order.OrderDate;
                 orderDto.Status = order.status;
-                foreach (var PrdId in orderProductIds)
-                {
-                    var prd = await _productService.GetById(PrdId);
-                    orderDto.ProductList.Add(prd);
-                }
 
+                var prdDtoList = new List<ProductDto>();
+                var orderprds = await _context.OrderProducts.Where(op => op.OrderId == order.ID).ToListAsync();
+                foreach (var item in orderprds)
+                {
+                    var prd = await _productService.GetById(item.ProductId);
+                    prd.Quantity = item.Quantity;
+                    prdDtoList.Add(prd);
+                }
+                orderDto.ProductList = prdDtoList;
                 orderList.Add(orderDto);
             }
             return orderList;
@@ -103,11 +108,17 @@ namespace ITI.Ecommerce.Services
                     Status = order.status
                 };
 
-                foreach (var PrdId in orderProductIds)
+                var prdDtoList = new List<ProductDto>();
+
+                var orderprds = await _context.OrderProducts.Where(op => op.OrderId == order.ID).ToListAsync();
+                foreach (var item in orderprds)
                 {
-                    var prd = await _productService.GetById(id);
-                    orderDto.ProductList.Add(prd);
+                    var prd = await _productService.GetById(item.ProductId);
+                    prd.Quantity = item.Quantity;
+                    prdDtoList.Add(prd);
                 }
+                orderDto.ProductList = prdDtoList;
+                
                 return orderDto;
             }
         }
@@ -133,11 +144,16 @@ namespace ITI.Ecommerce.Services
 
                 };
 
-                foreach (var PrdId in orderProductIds)
+                var prdDtoList = new List<ProductDto>();
+
+                var orderprds = await _context.OrderProducts.Where(op => op.OrderId == order.ID).ToListAsync();
+                foreach (var item in orderprds)
                 {
-                    var prd = await _productService.GetById(PrdId);
-                    orderDto.ProductList.Add(prd);
+                    var prd = await _productService.GetById(item.ProductId);
+                    prd.Quantity = item.Quantity;
+                    prdDtoList.Add(prd);
                 }
+                orderDto.ProductList = prdDtoList;
                 orderDtoList.Add(orderDto);
 
             }
@@ -145,14 +161,100 @@ namespace ITI.Ecommerce.Services
             return orderDtoList;
         }
 
-        //public void Update(OrderDto orderDto)
-        //{
-        //    var order = _context.Orders.FirstOrDefault(o => o.ID == orderDto.ID);
-        //    order.CustomerId = orderDto.CustomerId;
-        //    order.PaymentId = orderDto.PaymentId;
-        //    order.OrderDate = orderDto.OrderDate;
 
-        //    _context.SaveChanges();
-        //}
+        public async Task Update(OrderDto orderDto)
+        {
+            var order =  _context.Orders.FirstOrDefault(o => o.ID == orderDto.ID);
+            var productInOrder = await _context.OrderProducts.Where(op => op.OrderId == orderDto.ID).ToListAsync();
+
+            foreach (var orderPrd in productInOrder)
+            {
+                _context.OrderProducts.Attach(orderPrd);
+                _context.OrderProducts.Remove(orderPrd);
+            }
+
+            order.CustomerId = orderDto.CustomerId;
+            order.PaymentId = orderDto.PaymentId;
+            order.OrderDate = orderDto.OrderDate;
+            foreach (var prd in orderDto.ProductList)
+            {
+                var orderProduct = new OrderProduct()
+                {
+                    OrderId = order.ID,
+                    ProductId = prd.ID
+                };
+               order.OrderProducts.Add(orderProduct);
+            }
+            _context.SaveChanges();
+        }
+        public void ChangeToDelivered(int orderid)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.ID == orderid);
+            order.status = "Delivered";
+            _context.SaveChanges();
+        }
+
+
+        public async Task<IEnumerable<OrderDto>> GetAllDelivered()
+        {
+            List<OrderDto> orderList = new List<OrderDto>();
+
+
+            var orders = await _context.Orders.Where(o => o.IsDeleted == false && o.status == "Delivered").ToListAsync();
+            foreach (var order in orders)
+            {
+                var orderProductIds = await _context.OrderProducts.Where(op => op.OrderId == order.ID).Select(op => op.ProductId).ToListAsync();
+
+                OrderDto orderDto = new OrderDto();
+                orderDto.ID = order.ID;
+                orderDto.CustomerId = order.CustomerId;
+                orderDto.PaymentId = order.PaymentId;
+                orderDto.OrderDate = order.OrderDate;
+                orderDto.IsDeleted = order.IsDeleted;
+                orderDto.Status = order.status;
+
+
+
+                var prdDtoList = new List<ProductDto>();
+
+                foreach (var PrdId in orderProductIds)
+                {
+                    var prd = await _productService.GetById(PrdId);
+                    prdDtoList.Add(prd);
+                }
+                orderDto.ProductList = prdDtoList;
+                orderList.Add(orderDto);
+            }
+            return orderList;
+        }
+
+        public async Task<IEnumerable<OrderDto>> GetAllPending()
+        {
+            List<OrderDto> orderList = new List<OrderDto>();
+            var orders = await _context.Orders.Where(o => o.IsDeleted == false && o.status == "Pending").ToListAsync();
+            foreach (var order in orders)
+            {
+                var orderProductIds = await _context.OrderProducts.Where(op => op.OrderId == order.ID).Select(op => op.ProductId).ToListAsync();
+
+                OrderDto orderDto = new OrderDto();
+                orderDto.ID = order.ID;
+                orderDto.CustomerId = order.CustomerId;
+                orderDto.PaymentId = order.PaymentId;
+                orderDto.OrderDate = order.OrderDate;
+                orderDto.IsDeleted = order.IsDeleted;
+                orderDto.Status = order.status;
+               
+               var prdDtoList = new List<ProductDto>();
+
+                foreach (var PrdId in orderProductIds)
+                {
+                    var prd = await _productService.GetById(PrdId);
+                    prdDtoList.Add(prd);
+                }
+                orderDto.ProductList= prdDtoList;
+                orderList.Add(orderDto);
+            }
+            return orderList;
+        }
     }
 }

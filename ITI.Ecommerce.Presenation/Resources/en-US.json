@@ -59,11 +59,16 @@
   "Payment ID": "Payment ID",
   "Order Date": "Order Date",
   "Shopping Cart ID": "Shopping Cart ID",
-
   "Deleted Category": "Deleted Category",
   "Deleted Products": "Deleted Products",
   "Deleted Users": "Deleted Users",
-  "Restore": "Restore"
+  "Restore": "Restore",
+
+
+  "Status": "Status",
+  "Delivered Orders": "Delivered Orders",
+  "Pending Orders": "Pending Orders",
+  "Delivery": "Delivery"
 
 
 }

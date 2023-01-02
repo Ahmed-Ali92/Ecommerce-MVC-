@@ -78,7 +78,7 @@ namespace ITI.Ecommerce.Presenation
             {
                 options.LoginPath = "/User/SignIn";
 
-                options.AccessDeniedPath = "/User/SignIn";
+                options.AccessDeniedPath = "/User/SignUp";
             });
 
             var app = builder.Build();

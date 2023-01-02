@@ -106,25 +106,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
             var Prod = await _productService.GetById(pro);
             List<IFormFile> li = new List<IFormFile>();
 
-            //foreach(var i in Prod.productImageList)
-            //{
-            //    li.Add()
-            //}
-
-            //ProductModel pm = new ProductModel()
-            //{
-            //    NameAR = Prod.NameAR,
-            //    NameEN = Prod.NameEN,
-            //    Brand = Prod.Brand,
-            //    Description = Prod.Description,
-            //    CategoryID = Prod.CategoryID,
-            //    Quantity = Prod.Quantity,
-            //    UnitPrice = Prod.UnitPrice,
-            //    IsDeleted = false,
-            //    Discount = Prod.Discount,
-            //    TotalPrice = Prod.TotalPrice,
-
-            //};
+           
 
 
             return View(Prod);
@@ -151,26 +133,19 @@ namespace ITI.Ecommerce.Presenation.Controllersss
 
             var Prod = await _productService.GetById(id);
 
-            //if (c != null)
-            //{
+            
             foreach (var x in c)
             {
                 ViewBag.path = x.Path;
             }
 
-            //var img = prod.productImageList.FirstOrDefault().Path;
-            //if (img != null)
-            //{
-            //    ViewBag.path = img;
-            //}
-            //else
-            //    ViewBag.path = "1.jpg";
+        
 
 
 
             return View(Prod);
 
-            // }
+     
 
         }
         [HttpPost]
@@ -181,19 +156,7 @@ namespace ITI.Ecommerce.Presenation.Controllersss
             return RedirectToAction("GetProductByCat", new { IId = 1 });
         }
         [HttpGet]
-        //public async Task<IActionResult> GetProductByCat(int IId)
-        //{
-
-        //    var Product = await _pro.GetByCategoryId(1);
-        //    //ViewBag.Cat = Proudicts.Select(i=> new SelectListItem(i.NameAR, i.ID.ToString())); ;
-        //    //var Page = Proudicts.ToPagedList(pageIndex, pageSize);
-
-        //    var Pro = await _pro.GetAll();
-
-        //    ViewBag.Cat = Pro.Select(i => new SelectListItem(i.NameAR, i.ID.ToString()));
-
-        //    return View(Product);
-        //}
+       
         [HttpGet]
         public async Task<IActionResult> AddProductImages(int img)
         {
